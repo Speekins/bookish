@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router'
 import Home from '../Home/Home'
 import { getBooks } from '../../apiCalls'
+import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery } from '../../production-data'
 
 const App = () => {
 
