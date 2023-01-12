@@ -10,18 +10,21 @@ const App = () => {
 
 
   useEffect(() => {
-    const newBooks = async () => {
-      const yeah = await getBooks('https://hapi-books.p.rapidapi.com/week/mystery')
-      setBooks(yeah.slice(0, 6))
-    }
-    newBooks()
+    // const newBooks = async () => {
+    //   const yeah = await getBooks('https://hapi-books.p.rapidapi.com/week/mystery')
+    //   setBooks(yeah.slice(0, 6))
+    // }
+    // newBooks()
+    setBooks(horror)
   }, [])
 
-  console.log(books)
   return (
-    <>
-      {books && <Home books={books} />}
-    </>
+    <Routes>
+      <Route
+        exact path='/'
+        element={<Home books={books} />}
+      />
+    </Routes>
   )
 }
 
