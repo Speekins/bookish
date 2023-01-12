@@ -22,7 +22,7 @@ const App = () => {
     <Routes>
       <Route
         exact path='/'
-        element={<Home books={books} />}
+        element={ books && <Home books={books} />}
       />
     </Routes>
   )
