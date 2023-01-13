@@ -10,12 +10,13 @@ const App = () => {
 
   useEffect(() => {
     const newBooks = async () => {
-      const yeah = await getBooks('https://hapi-books.p.rapidapi.com/search/where+the+crawdads')
-      setBooks(yeah)
+      const yeah = await getBooks('https://hapi-books.p.rapidapi.com/week/mystery')
+      setBooks(yeah.slice(0, 6))
     }
     newBooks()
   }, [])
 
+  console.log(books)
   return (
     <>
       {books && <Home books={books} />}

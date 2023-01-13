@@ -1,0 +1,30 @@
+.book {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-cover {
+  width: 250px;
+  height: auto;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart {
+  height: 20px;
+  fill: white;
+  transition-duration: 300ms;
+  margin-right: 10px;
+}
+
+.heart:hover {
+  transform: scale(1.4);
+}
