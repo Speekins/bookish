@@ -4,31 +4,44 @@ import './Book.css'
 import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
-const Book = ({ book_id, name, cover, url, addToFavorites, genre, liked }) => {
+const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, genre, liked }) => {
 
   const [isFavorite, setIsFavorite] = useState(liked)
 
   const handleChange = () => {
-    isFavorite ? setIsFavorite(false) : setIsFavorite(true)
+    isFavorite === true ? setIsFavorite(false) : setIsFavorite(true)
   }
 
-  const newBook = <Book
-  name={name}
-  cover={cover}
-  url={url}
-  key={book_id}
-  book_id={book_id}
-  addToFavorites={addToFavorites}
-  genre={genre}
-  liked={true}
-/>
+  const likeBook = <Book
+    name={name}
+    cover={cover}
+    url={url}
+    key={book_id}
+    book_id={book_id}
+    addToFavorites={addToFavorites}
+    removeFromFavorites={removeFromFavorites}
+    genre={genre}
+    liked={true}
+  />
+
+  const unlikeBook = <Book
+    name={name}
+    cover={cover}
+    url={url}
+    key={book_id}
+    book_id={book_id}
+    addToFavorites={addToFavorites}
+    removeFromFavorites={removeFromFavorites}
+    genre={genre}
+    liked={false}
+  />
 
   const favorite = <img src={fillHeart}
     alt="favorite icon"
     className='heart'
     onClick={() => {
-      //removeFromFavorites(book_id, genre)
       handleChange()
+      removeFromFavorites(book_id, genre, unlikeBook)
     }}
   />
 
@@ -37,7 +50,7 @@ const Book = ({ book_id, name, cover, url, addToFavorites, genre, liked }) => {
     className='heart'
     onClick={() => {
       handleChange()
-      addToFavorites(book_id, genre, newBook)
+      addToFavorites(book_id, genre, likeBook)
     }}
   />
 

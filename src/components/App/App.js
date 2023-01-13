@@ -15,6 +15,7 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
+
   switch (action.type) {
     case "SUCCESS":
       return { ...state, isLoading: false, books: { ...state.books, [action.genre]: action.payload } }
@@ -25,8 +26,15 @@ const reducer = (state, action) => {
       let genreList = [...state.books[genre]]
       let index = genreList.findIndex(book => book.props.book_id === id)
       genreList[index] = newBook
-      console.log(genreList)
-      return { ...state, isLoading: false, books: {...state.books, [genre]: genreList}, myLibrary: [...state.myLibrary, newBook]}
+      return { ...state, isLoading: false, books: { ...state.books, [genre]: genreList }, myLibrary: [...state.myLibrary, newBook] }
+    case "UNFAVORITE":
+      let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
+      let genreType = [...state.books[action.payload.genre]]
+      let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
+      console.log(action.payload.newBook)
+      genreType[idx] = action.payload.newBook
+      console.log(genreType[idx])
+      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -55,18 +63,19 @@ const App = () => {
         key={book.book_id}
         book_id={book.book_id}
         addToFavorites={addToFavorites}
+        removeFromFavorites={removeFromFavorites}
         genre={genre}
         liked={false}
       />)
     return books
   }
 
-  const removeFromFavorites = (id, genre) => {
-    dispatch({ type: "UNFAVORITE", payload: id, genre: genre })
+  const removeFromFavorites = (id, genre, newBook) => {
+    dispatch({ type: "UNFAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
   }
 
   const addToFavorites = (id, genre, newBook) => {
-    dispatch({ type: "FAVORITE", payload: {id: id, genre: genre, newBook: newBook}})
+    dispatch({ type: "FAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
   }
 
   return (
