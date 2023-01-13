@@ -11,10 +11,12 @@
 .book-cover {
   width: 250px;
   height: auto;
+  border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
 }
 
 .book-cover:hover {
+  border-top: 5px solid red;
   border-bottom: 5px solid red;
   cursor: pointer;
 }
@@ -31,7 +33,7 @@
 .heart {
   height: 30px;
   fill: white;
-  transition-duration: 300ms;
+  transition-duration: 200ms;
   margin-right: 25px
 }
 

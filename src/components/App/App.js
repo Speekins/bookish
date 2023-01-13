@@ -45,9 +45,14 @@ const App = () => {
     // }
     // newBooks()
     //setBooks(horror)
-    dispatch({ type: "SUCCESS", payload: fiction, name: 'fiction' })
+    const genres = { horror: horror, fiction: fiction, nonFiction: nonFiction, history: history, memoir, scienceFiction: scienceFiction, romance: romance, mystery: mystery}
+    Object.values(genres).forEach((genre, idx) => {
+      let names = Object.keys(genres)
+      dispatch({ type: "SUCCESS", payload: genre, name: names[idx] })
+    })
+    
   }, [])
-  console.log(state.books)
+
   return (
     <Routes>
       <Route
