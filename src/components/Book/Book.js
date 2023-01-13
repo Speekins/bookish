@@ -26,7 +26,7 @@ const Book = ({ name, cover }) => {
       <div className='title'>
         {!isFavorite && unFavorite}
         {isFavorite && favorite}
-        <p>{name}</p>
+        <p className='name'>{name}</p>
       </div>
     </div>
   )

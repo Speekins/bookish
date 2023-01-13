@@ -5,26 +5,37 @@
   padding: 10px;
   justify-content: center;
   align-items: center;
+  margin: 10px 0;
 }
 
 .book-cover {
   width: 250px;
   height: auto;
+  border-bottom: 5px solid transparent;
+}
+
+.book-cover:hover {
+  border-bottom: 5px solid red;
+  cursor: pointer;
 }
 
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 14px;
 }
 
 .heart {
-  height: 20px;
+  height: 30px;
   fill: white;
   transition-duration: 300ms;
-  margin-right: 10px;
+  margin-right: 25px
 }
 
 .heart:hover {
   transform: scale(1.4);
+  cursor: pointer;
 }
