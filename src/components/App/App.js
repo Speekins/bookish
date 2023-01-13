@@ -17,13 +17,21 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "SUCCESS":
-      console.log('success!', state)
       return { ...state, isLoading: false, books: { ...state.books, [action.genre]: action.payload } }
     case "FAVORITE":
-      console.log('favorite!')
-      return { ...state, isLoading: false, myLibrary: [...state.myLibrary, action.payload] }
+      let list = state.books[action.genre]
+      let index = list.findIndex(book => {
+        return book.props.book_id === action.payload
+      })
+      let book = list[index]
+      let newBook = { ...book }
+      return {
+        ...state,
+        isLoading: false,
+        books: { ...state.books },
+        myLibrary: [...state.myLibrary, newBook]
+      }
     case "ERROR":
-      console.log('error!')
       return { ...state, isLoading: false, error: true }
     default:
       return state
@@ -40,7 +48,6 @@ const App = () => {
       let genre = Object.keys(genres)[idx]
       dispatch({ type: "SUCCESS", payload: formatBooks(booksByGenre, genre), genre: genre })
     })
-
   }, [])
 
   const formatBooks = (booksByGenre, genre) => {
@@ -52,17 +59,13 @@ const App = () => {
         key={book.book_id}
         book_id={book.book_id}
         addToFavorites={addToFavorites}
-        isFavorite='false'
         genre={genre}
       />)
     return books
   }
 
   const addToFavorites = (id, genre) => {
-    console.log(state)
-    // let book = state.books[genre].find(book => book.book_id === id)
-    // book.isFavorite = 'true'
-    // dispatch({ type: "FAVORITE", payload: book })
+    dispatch({ type: "FAVORITE", payload: id, genre: genre })
   }
 
   return (
