@@ -19,18 +19,13 @@ const reducer = (state, action) => {
     case "SUCCESS":
       return { ...state, isLoading: false, books: { ...state.books, [action.genre]: action.payload } }
     case "FAVORITE":
-      let list = state.books[action.genre]
-      let index = list.findIndex(book => {
-        return book.props.book_id === action.payload
-      })
-      let book = list[index]
-      let newBook = { ...book }
-      return {
-        ...state,
-        isLoading: false,
-        books: { ...state.books },
-        myLibrary: [...state.myLibrary, newBook]
-      }
+      let genre = action.payload.genre
+      let id = action.payload.id
+      let newBook = action.payload.newBook
+      let genreList = [...state.books[genre]]
+      let index = genreList.findIndex(book => book.book_id === id)
+      genreList[index] = newBook
+      return { ...state, isLoading: false, books: {...state.books, [genre]: genreList}, myLibrary: [...state.myLibrary, newBook]}
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -60,12 +55,17 @@ const App = () => {
         book_id={book.book_id}
         addToFavorites={addToFavorites}
         genre={genre}
+        liked={false}
       />)
     return books
   }
 
-  const addToFavorites = (id, genre) => {
-    dispatch({ type: "FAVORITE", payload: id, genre: genre })
+  const removeFromFavorites = (id, genre) => {
+    dispatch({ type: "UNFAVORITE", payload: id, genre: genre })
+  }
+
+  const addToFavorites = (id, genre, newBook) => {
+    dispatch({ type: "FAVORITE", payload: {id: id, genre: genre, newBook: newBook}})
   }
 
   return (

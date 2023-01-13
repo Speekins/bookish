@@ -6,27 +6,6 @@ import './Home.css'
 import NavBar from '../NavBar/NavBar'
 
 const Home = ({ books }) => {
-  // const [isLoading, setIsLoading] = useState(true)
-  // const [allBooks, setAllBooks] = useState({})
-
-  // useEffect(() => {
-  //   let genres = ['horror', 'fiction', 'nonFiction', 'history', 'memoir', 'scienceFiction', 'romance', 'mystery']
-  //   genres.forEach(genre => {
-  //     let bookComponents = books[genre].map(book =>
-  //       <Book
-  //         name={book.name}
-  //         cover={book.cover}
-  //         url={book.url}
-  //         key={book.book_id}
-  //         book_id={book.book_id}
-  //         addToFavorites={addToFavorites}
-  //         isFavorite='false'
-  //       />)
-  //     setAllBooks(allBooks => { return { ...allBooks, [genre]: bookComponents } })
-  //   })
-
-  //   setIsLoading(false)
-  // }, [])
 
   return (
     <>
