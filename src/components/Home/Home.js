@@ -5,9 +5,8 @@ import '../NavBar/NavBar'
 import './Home.css'
 import NavBar from '../NavBar/NavBar'
 
-const Home = ({ books }) => {
-
-  const allBooks = books.map((book, idx) => <Book name={book.name} cover={book.cover} rating={book.rating} year={book.year} key={idx} id={book.id} />)
+const Home = ({books}) => {
+  const allBooks = books.fiction.map((book, idx) => <Book name={book.name} cover={book.cover} rating={book.rating} year={book.year} key={idx} id={book.id} />)
 
   return (
     <>
