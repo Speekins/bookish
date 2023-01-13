@@ -1,0 +1,10 @@
+.my-library-banner {
+  width: 100%
+}
+
+.my-library-header {
+  font-size: 80px;
+  font-family: 'Nanum Gothic', sans-serif;
+  margin-top: 0;
+  margin-bottom: 0;
+}
