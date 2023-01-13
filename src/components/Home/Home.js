@@ -10,10 +10,9 @@ const Home = ({ books }) => {
   const [allBooks, setAllBooks] = useState({})
 
   useEffect(() => {
-    Object.values(books).forEach((bookType, idx) => {
-      let name = Object.keys(books)[idx]
-      console.log(name)
-      let formattedBooks = bookType.map((book, idx) =>
+    let genres = ['horror', 'fiction', 'nonFiction', 'history', 'memoir', 'scienceFiction', 'romance', 'mystery']
+    genres.forEach((genre, idx) => {
+      let bookComponents = books[genre].map((book, idx) =>
         <Book
           name={book.name}
           cover={book.cover}
@@ -22,11 +21,12 @@ const Home = ({ books }) => {
           key={idx}
           id={book.id}
         />)
-      setAllBooks(allBooks => [...allBooks, { [name]: formattedBooks }])
+      setAllBooks(allBooks => { return { ...allBooks, [genre]: bookComponents } })
     })
+
     setIsLoading(false)
   }, [])
-  console.log(allBooks)
+
   return (
     <>
       <div className='banner'>
@@ -34,11 +34,26 @@ const Home = ({ books }) => {
         <h1 className='bookish'>BOOKISH</h1>
       </div>
       <NavBar />
-      <div className='book-container'>
-        <h1>Fiction</h1>
-        {isLoading ? <p>Loading...</p>
-          : allBooks[0].mystery}
-      </div>
+      {isLoading ? <p>Loading...</p>
+        : <div className='book-container'>
+          <h1>Fiction</h1>
+          {allBooks.fiction}
+          <h1>Non-Fiction</h1>
+          {allBooks.nonFiction}
+          <h1>Mystery</h1>
+          {allBooks.mystery}
+          <h1>Memoir</h1>
+          {allBooks.memoir}
+          <h1>Romance</h1>
+          {allBooks.romance}
+          <h1>History</h1>
+          {allBooks.history}
+          <h1>Horror</h1>
+          {allBooks.horror}
+          <h1>Science Fiction</h1>
+          {allBooks.scienceFiction}
+        </div>
+      }
     </>
   )
 }
