@@ -23,8 +23,9 @@ const reducer = (state, action) => {
       let id = action.payload.id
       let newBook = action.payload.newBook
       let genreList = [...state.books[genre]]
-      let index = genreList.findIndex(book => book.book_id === id)
+      let index = genreList.findIndex(book => book.props.book_id === id)
       genreList[index] = newBook
+      console.log(genreList)
       return { ...state, isLoading: false, books: {...state.books, [genre]: genreList}, myLibrary: [...state.myLibrary, newBook]}
     case "ERROR":
       return { ...state, isLoading: false, error: true }
