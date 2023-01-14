@@ -8,6 +8,7 @@ import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, 
 
 const initialState = {
   isLoading: true,
+  showModal: false,
   books: {},
   myLibrary: [],
   error: false,
@@ -35,6 +36,9 @@ const reducer = (state, action) => {
       genreType[idx] = action.payload.newBook
       console.log(genreType[idx])
       return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
+    case "MODAL":
+      let modalState = state.showModal ? false : true
+      return {...state, showModal: modalState}
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -62,10 +66,11 @@ const App = () => {
         url={book.url}
         key={book.book_id}
         book_id={book.book_id}
-        addToFavorites={addToFavorites}
-        removeFromFavorites={removeFromFavorites}
         genre={genre}
         liked={false}
+        addToFavorites={addToFavorites}
+        removeFromFavorites={removeFromFavorites}
+        handleModalState={handleModalState}
       />)
     return books
   }
@@ -78,11 +83,15 @@ const App = () => {
     dispatch({ type: "FAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
   }
 
+  const handleModalState = () => {
+    dispatch({type: "MODAL"})
+  }
+
   return (
     <Routes>
       <Route
         exact path='/'
-        element={!state.isLoading && <Home books={state.books} addToFavorites={addToFavorites} />}
+        element={!state.isLoading && <Home books={state.books} />}
       />
       <Route
         path='my-library'
