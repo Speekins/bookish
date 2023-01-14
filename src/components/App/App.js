@@ -4,13 +4,13 @@ import Home from '../Home/Home'
 import MyLibrary from '../MyLibrary/MyLibrary'
 import Book from '../Book/Book'
 import { getBooks } from '../../apiCalls'
-import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery } from '../../production-data'
+import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery, singleBook } from '../../production-data'
 
 const initialState = {
   isLoading: true,
   showModal: false,
   books: {},
-  bookDetail: null,
+  bookDetails: null,
   myLibrary: [],
   error: false,
   data: null
@@ -33,13 +33,19 @@ const reducer = (state, action) => {
       let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
       let genreType = [...state.books[action.payload.genre]]
       let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
-      console.log(action.payload.newBook)
       genreType[idx] = action.payload.newBook
-      console.log(genreType[idx])
       return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
     case "MODAL":
       let modalState = state.showModal ? false : true
-      return {...state, showModal: modalState}
+      if (modalState) {
+        return { ...state, showModal: modalState, bookDetails: action.payload }
+      } else {
+        return { ...state, showModal: modalState, bookDetails: null }
+      }
+    case "BOOK_DETAIL":
+      const book = action.payload.bookDetails ? action.payload.bookDetails : null
+      console.log(book)
+      return { ...state, bookDetails: book }
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -84,19 +90,26 @@ const App = () => {
     dispatch({ type: "FAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
   }
 
-  const handleModalState = () => {
-    dispatch({type: "MODAL"})
+  const handleModalState = (id) => {
+    let bookDetails = singleBook
+    dispatch({ type: "MODAL", payload: bookDetails })
   }
 
   return (
     <Routes>
       <Route
         exact path='/'
-        element={!state.isLoading && <Home books={state.books} showModal={state.showModal} handleModalState={handleModalState}/>}
+        element={!state.isLoading &&
+          <Home
+            books={state.books}
+            showModal={state.showModal}
+            bookDetails={state.bookDetails}
+            handleModalState={handleModalState}
+          />}
       />
       <Route
         path='my-library'
-        element={<MyLibrary myLibrary={state.myLibrary} showModal={state.modalState} handleModalState={handleModalState}/>}
+        element={<MyLibrary myLibrary={state.myLibrary} showModal={state.modalState} handleModalState={handleModalState} />}
       />
     </Routes>
   )

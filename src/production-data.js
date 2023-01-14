@@ -316,4 +316,18 @@ const mystery = [
   }
 ]
 
-export { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery }
+const singleBook = {
+  "book_id": 56597885,
+  "name": "Beautiful World, Where Are You",
+  "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1618329605l/56597885.jpg",
+  "url": "https://www.goodreads.com/book/show/56597885",
+  "authors": [
+    "Sally Rooney"
+  ],
+  "rating": 3,
+  "pages": 356,
+  "published_date": "September 7th 2021",
+  "synopsis": "Beautiful World, Where Are You is a new novel by Sally Rooney, the bestselling author of Normal People and Conversations with Friends.Alice, a novelist, meets Felix, who works in a warehouse, and asks him if he’d like to travel to Rome with her. In Dublin, her best friend, Eileen, is getting over a break-up and slips back into flirting with Simon, a man she has known sinceBeautiful World, Where Are You is a new novel by Sally Rooney, the bestselling author of Normal People and Conversations with Friends.Alice, a novelist, meets Felix, who works in a warehouse, and asks him if he’d like to travel to Rome with her. In Dublin, her best friend, Eileen, is getting over a break-up and slips back into flirting with Simon, a man she has known since childhood. Alice, Felix, Eileen, and Simon are still young—but life is catching up with them. They desire each other, they delude each other, they get together, they break apart. They have sex, they worry about sex, they worry about their friendships and the world they live in. Are they standing in the last lighted room before the darkness, bearing witness to something? Will they find a way to believe in a beautiful world?"
+}
+
+export { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery, singleBook }

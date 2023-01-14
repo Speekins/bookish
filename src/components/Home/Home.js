@@ -6,11 +6,7 @@ import './Home.css'
 import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 
-const Home = ({ books, showModal, handleModalState }) => {
-
-  // useEffect(() => {
-
-  // }, [modalState])
+const Home = ({ books, showModal, handleModalState, bookDetails }) => {
 
   return (
     <>
@@ -18,7 +14,7 @@ const Home = ({ books, showModal, handleModalState }) => {
         <img alt="Banner with books" className='banner-image' src={Banner} />
         <h1 className='bookish'>BOOKISH</h1>
       </div>
-      {showModal && <Modal handleModalState={handleModalState}/>}
+      {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails}/>}
       <NavBar />
       <div className='book-container'>
         <h1>Fiction</h1>
