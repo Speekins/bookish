@@ -1,15 +1,14 @@
 import React from 'react'
 import './Modal.css'
 
-const Modal = () => {
-
+const Modal = ({handleModalState}) => {
 
   return (
     <div className='modal-container'>
       <div className='modal'>
         <h1>This is the modal!</h1>
-      </div>
-      <button className='close-modal'>Close</button>
+        <button className='close-modal' onClick={handleModalState}>Close</button>
+      </div> 
     </div>
   )
 }

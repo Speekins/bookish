@@ -88,16 +88,15 @@ const App = () => {
     dispatch({type: "MODAL"})
   }
 
-  console.log(state.showModal)
   return (
     <Routes>
       <Route
         exact path='/'
-        element={!state.isLoading && <Home books={state.books} modalState={state.showModal}/>}
+        element={!state.isLoading && <Home books={state.books} showModal={state.showModal} handleModalState={handleModalState}/>}
       />
       <Route
         path='my-library'
-        element={<MyLibrary myLibrary={state.myLibrary} modalState={state.modalState}/>}
+        element={<MyLibrary myLibrary={state.myLibrary} showModal={state.modalState} handleModalState={handleModalState}/>}
       />
     </Routes>
   )
