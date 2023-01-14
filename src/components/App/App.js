@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router'
 import Home from '../Home/Home'
 import MyLibrary from '../MyLibrary/MyLibrary'
 import Book from '../Book/Book'
-import { getBooks } from '../../apiCalls'
+import { getBooks, getBookById } from '../../apiCalls'
 import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery, singleBook } from '../../production-data'
 
 const initialState = {
@@ -91,8 +91,13 @@ const App = () => {
   }
 
   const handleModalState = (id) => {
-    let bookDetails = singleBook
-    dispatch({ type: "MODAL", payload: bookDetails })
+    //let bookDetails = singleBook
+    if (id) {
+      getBookById('https://hapi-books.p.rapidapi.com/book', id)
+        .then((book) => dispatch({ type: "MODAL", payload: book }))
+    } else {
+      dispatch({ type: "MODAL", payload: null })
+    }
   }
 
   return (

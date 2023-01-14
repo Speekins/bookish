@@ -14,8 +14,10 @@ const Modal = ({ handleModalState, bookDetails }) => {
           <p>Author(s): {authors}</p>
           <p>Rating: {bookDetails.rating}/5</p>
           <p>Length: {bookDetails.pages} Pages</p>
-          <img className='modal-cover' alt="Cover" src={bookDetails.cover}/>
-          <p>{bookDetails.synopsis}</p>
+          <img className='modal-cover' alt="Cover" src={bookDetails.cover} />
+          <div className='modal-synopsis'>
+            <p>{bookDetails.synopsis}</p>
+          </div>
           <button className='close-modal' onClick={handleModalState}>Close</button>
         </div>
       </div>
