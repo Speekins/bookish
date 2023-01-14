@@ -4,7 +4,7 @@ import './Book.css'
 import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
-const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, genre, liked }) => {
+const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, handleModalState, genre, liked }) => {
 
   const [isFavorite, setIsFavorite] = useState(liked)
 
@@ -56,7 +56,7 @@ const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, 
 
   return (
     <div className='book'>
-      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" />
+      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" onClick={handleModalState}/>
       <div className='title'>
         {isFavorite === true ? favorite : unFavorite}
         <p className='name'>{name}</p>

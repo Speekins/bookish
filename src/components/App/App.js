@@ -10,6 +10,7 @@ const initialState = {
   isLoading: true,
   showModal: false,
   books: {},
+  bookDetail: null,
   myLibrary: [],
   error: false,
   data: null
@@ -87,15 +88,16 @@ const App = () => {
     dispatch({type: "MODAL"})
   }
 
+  console.log(state.showModal)
   return (
     <Routes>
       <Route
         exact path='/'
-        element={!state.isLoading && <Home books={state.books} />}
+        element={!state.isLoading && <Home books={state.books} modalState={state.showModal}/>}
       />
       <Route
         path='my-library'
-        element={<MyLibrary myLibrary={state.myLibrary} />}
+        element={<MyLibrary myLibrary={state.myLibrary} modalState={state.modalState}/>}
       />
     </Routes>
   )
