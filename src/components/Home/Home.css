@@ -22,18 +22,19 @@
 .genre {
   display: flex;
   width: 98%;
-  height: 600px;
-  margin-bottom: 80px;
+  height: 500px;
+  margin-bottom: 0;
   margin-left: 30px;
-  padding: 20px 10px;
+  padding: 10px;
   overflow: scroll;
   justify-content: baseline;
-  align-items: baseline;
+  align-items: center;
 }
 
 .genre-name {
   font-size: 60px;
   margin-left: 30px;
+  margin-bottom: 0;
 }
 
 .loading-container {
