@@ -20,6 +20,7 @@ const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, 
     book_id={book_id}
     addToFavorites={addToFavorites}
     removeFromFavorites={removeFromFavorites}
+    handleModalState={handleModalState}
     genre={genre}
     liked={true}
   />
