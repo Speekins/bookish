@@ -6,26 +6,6 @@ import './Home.css'
 import NavBar from '../NavBar/NavBar'
 
 const Home = ({ books }) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [allBooks, setAllBooks] = useState({})
-
-  useEffect(() => {
-    let genres = ['horror', 'fiction', 'nonFiction', 'history', 'memoir', 'scienceFiction', 'romance', 'mystery']
-    genres.forEach((genre, idx) => {
-      let bookComponents = books[genre].map((book, idx) =>
-        <Book
-          name={book.name}
-          cover={book.cover}
-          rating={book.rating}
-          year={book.year}
-          key={idx}
-          id={book.id}
-        />)
-      setAllBooks(allBooks => { return { ...allBooks, [genre]: bookComponents } })
-    })
-
-    setIsLoading(false)
-  }, [])
 
   return (
     <>
@@ -34,26 +14,24 @@ const Home = ({ books }) => {
         <h1 className='bookish'>BOOKISH</h1>
       </div>
       <NavBar />
-      {isLoading ? <p>Loading...</p>
-        : <div className='book-container'>
+      <div className='book-container'>
           <h1>Fiction</h1>
-          {allBooks.fiction}
+          {books.fiction}
           <h1>Non-Fiction</h1>
-          {allBooks.nonFiction}
+          {books.nonFiction}
           <h1>Mystery</h1>
-          {allBooks.mystery}
+          {books.mystery}
           <h1>Memoir</h1>
-          {allBooks.memoir}
+          {books.memoir}
           <h1>Romance</h1>
-          {allBooks.romance}
+          {books.romance}
           <h1>History</h1>
-          {allBooks.history}
+          {books.history}
           <h1>Horror</h1>
-          {allBooks.horror}
+          {books.horror}
           <h1>Science Fiction</h1>
-          {allBooks.scienceFiction}
+          {books.scienceFiction}
         </div>
-      }
     </>
   )
 }
