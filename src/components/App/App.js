@@ -115,7 +115,15 @@ const App = () => {
       />
       <Route
         path='my-library'
-        element={<MyLibrary myLibrary={state.myLibrary} showModal={state.modalState} handleModalState={handleModalState} />}
+        element={
+          <MyLibrary
+            myLibrary={state.myLibrary}
+            showModal={state.showModal}
+            bookDetails={state.bookDetails}
+            isLoading={state.isLoading}
+            handleModalState={handleModalState}
+          />
+        }
       />
     </Routes>
   )

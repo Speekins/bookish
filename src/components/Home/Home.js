@@ -9,8 +9,6 @@ import Loading from '../assets/images/bookish_loading.png'
 
 const Home = ({ books, showModal, handleModalState, bookDetails, isLoading }) => {
 
-  console.log(isLoading)
-
   return (
     <>
       <div className='banner'>
