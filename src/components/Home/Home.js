@@ -5,8 +5,11 @@ import '../NavBar/NavBar'
 import './Home.css'
 import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
+import Loading from '../assets/images/bookish_loading.png'
 
-const Home = ({ books, showModal, handleModalState, bookDetails }) => {
+const Home = ({ books, showModal, handleModalState, bookDetails, isLoading }) => {
+
+  console.log(isLoading)
 
   return (
     <>
@@ -14,7 +17,13 @@ const Home = ({ books, showModal, handleModalState, bookDetails }) => {
         <img alt="Banner with books" className='banner-image' src={Banner} />
         <h1 className='bookish'>BOOKISH</h1>
       </div>
-      {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails}/>}
+      {!!isLoading &&
+        <div className='loading-container'>
+          <h1>LOADING!</h1>
+          <img src={Loading} alt="Loading" className='loading-image'/>
+        </div>
+      }
+      {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
       <NavBar />
       <div className='book-container'>
         <h1>Fiction</h1>
@@ -34,7 +43,6 @@ const Home = ({ books, showModal, handleModalState, bookDetails }) => {
         <h1>Science Fiction</h1>
         {books.scienceFiction}
       </div>
-
     </>
   )
 }

@@ -38,14 +38,13 @@ const reducer = (state, action) => {
     case "MODAL":
       let modalState = state.showModal ? false : true
       if (modalState) {
-        return { ...state, showModal: modalState, bookDetails: action.payload }
+        return { ...state, showModal: modalState, bookDetails: action.payload, isLoading: false }
       } else {
-        return { ...state, showModal: modalState, bookDetails: null }
+        return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
       }
-    case "BOOK_DETAIL":
-      const book = action.payload.bookDetails ? action.payload.bookDetails : null
-      console.log(book)
-      return { ...state, bookDetails: book }
+    case "LOADING":
+      let isLoading = action.payload
+      return { ...state, isLoading: isLoading }
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -91,9 +90,10 @@ const App = () => {
   }
 
   const handleModalState = (id) => {
-    //let bookDetails = singleBook
+
     if (id) {
-      getBookById('https://hapi-books.p.rapidapi.com/book', id)
+      dispatch({ type: "LOADING", payload: true })
+      getBookById("https://hapi-books.p.rapidapi.com/book", id)
         .then((book) => dispatch({ type: "MODAL", payload: book }))
     } else {
       dispatch({ type: "MODAL", payload: null })
@@ -104,11 +104,12 @@ const App = () => {
     <Routes>
       <Route
         exact path='/'
-        element={!state.isLoading &&
+        element={
           <Home
             books={state.books}
             showModal={state.showModal}
             bookDetails={state.bookDetails}
+            isLoading={state.isLoading}
             handleModalState={handleModalState}
           />}
       />
