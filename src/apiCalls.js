@@ -12,4 +12,11 @@ const getBooks = (url) => {
     .catch(err => console.error(err))
 }
 
-export { getBooks }
+const getBookById = (url, id) => {
+  url = url + '/' + id
+  return fetch(url, get)
+  .then(response => response.json())
+  .catch(err => console.log(err))
+}
+
+export { getBooks, getBookById }

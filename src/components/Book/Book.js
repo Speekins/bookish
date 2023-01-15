@@ -56,7 +56,7 @@ const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, 
 
   return (
     <div className='book'>
-      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" onClick={handleModalState}/>
+      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" onClick={() => handleModalState(book_id)}/>
       <div className='title'>
         {isFavorite === true ? favorite : unFavorite}
         <p className='name'>{name}</p>
