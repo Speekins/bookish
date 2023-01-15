@@ -26,7 +26,7 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
   return (
     <div>
       <img src={banner} alt="search banner" className='search-banner' />
-      <NavBar clearSearch={clearSearch}/>
+      <NavBar clearSearch={clearSearch} view='search'/>
       {!!isLoading &&
         <div className='loading-container'>
           <h1>LOADING!</h1>

@@ -10,7 +10,8 @@
 }
 
 .my-library-button,
-.home-button {
+.home-button,
+.search {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,8 +25,14 @@
 }
 
 .my-library-button:hover,
-.home-button:hover {
+.home-button:hover,
+.search:hover {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  color: rgb(153, 147, 147)
 }

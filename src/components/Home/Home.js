@@ -22,7 +22,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
         </div>
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
-      <NavBar clearSearch={clearSearch}/>
+      <NavBar clearSearch={clearSearch} view='home'/>
       <h1 className='genre-name'>Fiction</h1>
       <div className='genre'>
         {books.fiction}

@@ -16,7 +16,7 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
         </div>
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
-      <NavBar clearSearch={clearSearch}/>
+      <NavBar clearSearch={clearSearch} view='my-library' />
       <h1 className='my-library-header'>My Library</h1>
       <div className='book-container'>
         {myLibrary.length ? myLibrary : <h1>No books in your library yet!</h1>}
