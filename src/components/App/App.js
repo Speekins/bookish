@@ -55,10 +55,12 @@ const reducer = (state, action) => {
         return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
       }
     case "SEARCH":
-      return { ...state, awardedBooks: action.payload }
+      return { ...state, isLoading: false, awardedBooks: action.payload }
     case "LOADING":
       let isLoading = action.payload
       return { ...state, isLoading: isLoading }
+    case "CLEAR":
+      return { ...state, books: { ...state.books }, myLibrary: [...state.myLibrary], awardedBooks: [] }
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -154,11 +156,16 @@ const App = () => {
   }
 
   const searchByYear = (year) => {
+    dispatch({ type: "LOADING", payload: true })
     getAwardedBooks(year)
       .then((data) => {
         let awardedBooks = formatBooks(data, null)
         dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
       })
+  }
+
+  const clearSearch = () => {
+    dispatch({ type: "CLEAR" })
   }
 
   return (
@@ -172,6 +179,7 @@ const App = () => {
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             handleModalState={handleModalState}
+            clearSearch={clearSearch}
           />}
       />
       <Route
@@ -183,13 +191,22 @@ const App = () => {
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             handleModalState={handleModalState}
+            clearSearch={clearSearch}
           />
         }
       />
       <Route
         path="search"
         element={
-          <Search awardedBooks={state.awardedBooks} searchByYear={searchByYear} />
+          <Search
+            awardedBooks={state.awardedBooks}
+            searchByYear={searchByYear}
+            showModal={state.showModal}
+            bookDetails={state.bookDetails}
+            isLoading={state.isLoading}
+            handleModalState={handleModalState}
+            clearSearch={clearSearch}
+          />
         }
       />
     </Routes>

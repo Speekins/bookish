@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal'
 import banner from '../assets/images/search_banner.jpg'
 import Loading from '../assets/images/bookish_loading.png'
 
-const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookDetails, isLoading }) => {
+const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
 
   const [year, setYear] = useState('')
 
@@ -26,7 +26,7 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
   return (
     <div>
       <img src={banner} alt="search banner" className='search-banner' />
-      <NavBar />
+      <NavBar clearSearch={clearSearch}/>
       {!!isLoading &&
         <div className='loading-container'>
           <h1>LOADING!</h1>

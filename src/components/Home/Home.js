@@ -7,7 +7,7 @@ import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 import Loading from '../assets/images/bookish_loading.png'
 
-const Home = ({ books, showModal, handleModalState, bookDetails, isLoading }) => {
+const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
 
   return (
     <div className='home'>
@@ -22,7 +22,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading }) =>
         </div>
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
-      <NavBar />
+      <NavBar clearSearch={clearSearch}/>
       <h1 className='genre-name'>Fiction</h1>
       <div className='genre'>
         {books.fiction}

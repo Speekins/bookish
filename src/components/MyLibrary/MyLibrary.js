@@ -5,7 +5,7 @@ import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 import Loading from '../assets/images/bookish_loading.png'
 
-const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoading }) => {
+const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
   return (
     <div>
       <img src={libraryBanner} alt='My Library Banner' className='my-library-banner' />
@@ -16,7 +16,7 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
         </div>
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
-      <NavBar />
+      <NavBar clearSearch={clearSearch}/>
       <h1 className='my-library-header'>My Library</h1>
       <div className='book-container'>
         {myLibrary.length ? myLibrary : <h1>No books in your library yet!</h1>}
