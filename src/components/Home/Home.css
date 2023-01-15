@@ -22,10 +22,13 @@
 .genre {
   display: flex;
   width: 98%;
-  height: 500px;
+  height: 600px;
   margin-bottom: 80px;
   margin-left: 30px;
+  padding: 20px 10px;
   overflow: scroll;
+  justify-content: baseline;
+  align-items: baseline;
 }
 
 .genre-name {
