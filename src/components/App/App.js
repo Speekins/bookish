@@ -26,12 +26,16 @@ const reducer = (state, action) => {
       return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
     case "FAVORITE":
       let genre = action.payload.genre
-      let id = action.payload.id
-      let newBook = action.payload.newBook
-      let genreList = [...state.books[genre]]
-      let index = genreList.findIndex(book => book.props.book_id === id)
-      genreList[index] = newBook
-      return { ...state, isLoading: false, books: { ...state.books, [genre]: genreList }, myLibrary: [...state.myLibrary, newBook] }
+      if (!genre) {
+        return { ...state, isLoading: false, myLibrary: [...state.myLibrary, action.payload.newBook] }
+      } else {
+        let id = action.payload.id
+        let newBook = action.payload.newBook
+        let genreList = [...state.books[genre]]
+        let index = genreList.findIndex(book => book.props.book_id === id)
+        genreList[index] = newBook
+        return { ...state, isLoading: false, books: { ...state.books, [genre]: genreList }, myLibrary: [...state.myLibrary, newBook] }
+      }
     case "UNFAVORITE":
       let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
       let genreType = [...state.books[action.payload.genre]]
