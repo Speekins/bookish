@@ -106,6 +106,29 @@ const App = () => {
     return books
   }
 
+  const checkForFavorite = (searchedBooks) => {
+    let libraryBooks = state.myLibrary.map(book => book.props.book_id)
+    return searchedBooks.map(book => {
+      if (libraryBooks.includes(Number(book.props.book_id))) {
+        let likedBook = <Book
+          name={book.props.name}
+          cover={book.props.cover}
+          url={book.props.url}
+          key={book.props.book_id}
+          book_id={book.props.book_id}
+          genre={book.props.genre}
+          liked={true}
+          addToFavorites={addToFavorites}
+          removeFromFavorites={removeFromFavorites}
+          handleModalState={handleModalState}
+        />
+        return likedBook
+      } else {
+        return book
+      }
+    })
+  }
+
   const removeFromFavorites = (id, genre, newBook) => {
     dispatch({ type: "UNFAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
   }
@@ -129,7 +152,7 @@ const App = () => {
     getAwardedBooks(year)
       .then((data) => {
         let awardedBooks = formatBooks(data, null)
-        dispatch({ type: "SEARCH", payload: awardedBooks })
+        dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
       })
   }
 
