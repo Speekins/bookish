@@ -6,8 +6,8 @@ const get = {
   }
 }
 
-const getBooks = (url) => {
-  return fetch(url, get)
+const getBooks = (name) => {
+  return fetch(`https://hapi-books.p.rapidapi.com/week/${name}`, get)
     .then(response => response.json())
     .catch(err => console.error(err))
 }

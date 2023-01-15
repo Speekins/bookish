@@ -5,6 +5,7 @@ import MyLibrary from '../MyLibrary/MyLibrary'
 import Book from '../Book/Book'
 import { getBooks, getBookById } from '../../apiCalls'
 import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery, singleBook } from '../../production-data'
+const genres = { horror: horror, fiction: fiction, nonFiction: nonFiction, history: history, memoir, scienceFiction: scienceFiction, romance: romance, mystery: mystery }
 
 const initialState = {
   isLoading: true,
@@ -20,7 +21,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "SUCCESS":
-      return { ...state, isLoading: false, books: { ...state.books, [action.genre]: action.payload } }
+      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
     case "FAVORITE":
       let genre = action.payload.genre
       let id = action.payload.id
@@ -57,14 +58,33 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    const genres = { horror: horror, fiction: fiction, nonFiction: nonFiction, history: history, memoir, scienceFiction: scienceFiction, romance: romance, mystery: mystery }
-    Object.values(genres).forEach((booksByGenre, idx) => {
-      let genre = Object.keys(genres)[idx]
-      dispatch({ type: "SUCCESS", payload: formatBooks(booksByGenre, genre), genre: genre })
-    })
+    let genreNames = ['horror', 'fiction', 'nonFiction', 'history', 'memoir', 'scienceFiction', 'romance', 'mystery']
+    let allBookData = {}
+    let allBooks
+    const get = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': '9d2d319c7amsh0029ddae235525fp1a6a97jsnf0bb69178641',
+        'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com'
+      }
+    }
+
+    const getIt = async () => {
+      for (let idx = 0; idx < genreNames.length; idx++) {
+        let genre = genreNames[idx]
+        await getBooks(genre)
+          .then((data) => {
+            let books = formatBooks(data.slice(0, 10), genre)
+            dispatch({ type: "SUCCESS", payload: { books: books, genre: genre } })
+          })
+      }
+    }
+
+    getIt()
   }, [])
 
   const formatBooks = (booksByGenre, genre) => {
+    console.log(booksByGenre)
     let books = booksByGenre.map(book =>
       <Book
         name={book.name}
