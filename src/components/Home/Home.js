@@ -10,7 +10,7 @@ import Loading from '../assets/images/bookish_loading.png'
 const Home = ({ books, showModal, handleModalState, bookDetails, isLoading }) => {
 
   return (
-    <>
+    <div className='home'>
       <div className='banner'>
         <img alt="Banner with books" className='banner-image' src={Banner} />
         <h1 className='bookish'>BOOKISH</h1>
@@ -18,30 +18,44 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading }) =>
       {!!isLoading &&
         <div className='loading-container'>
           <h1>LOADING!</h1>
-          <img src={Loading} alt="Loading" className='loading-image'/>
+          <img src={Loading} alt="Loading" className='loading-image' />
         </div>
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
       <NavBar />
-      <div className='book-container'>
-        <h1>Fiction</h1>
+      <h1 className='genre-name'>Fiction</h1>
+      <div className='genre'>
         {books.fiction}
-        <h1>Non-Fiction</h1>
+      </div>
+      <h1 className='genre-name'>Non-Fiction</h1>
+      <div className='genre'>
         {books.nonFiction}
-        <h1>Mystery</h1>
+      </div>
+      <h1 className='genre-name'>Mystery</h1>
+      <div className='genre'>
         {books.mystery}
-        <h1>Memoir</h1>
+      </div>
+      <h1 className='genre-name'>Memoir</h1>
+      <div className='genre'>
         {books.memoir}
-        <h1>Romance</h1>
+      </div>
+      <h1 className='genre-name'>Romance</h1>
+      <div className='genre'>
         {books.romance}
-        <h1>History</h1>
+      </div>
+      <h1 className='genre-name'>History</h1>
+      <div className='genre'>
         {books.history}
-        <h1>Horror</h1>
+      </div>
+      <h1 className='genre-name'>Horror</h1>
+      <div className='genre'>
         {books.horror}
-        <h1>Science Fiction</h1>
+      </div>
+      <h1 className='genre-name'>Science Fiction</h1>
+      <div className='genre'>
         {books.scienceFiction}
       </div>
-    </>
+    </div>
   )
 }
 

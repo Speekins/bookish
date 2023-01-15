@@ -13,3 +13,7 @@ code {
   font-family: 'Nanum Gothic', sans-serif;
   font-family: 'Playfair Display SC', serif;
 }
+
+* {
+  scroll-behavior: smooth;
+}

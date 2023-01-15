@@ -8,6 +8,7 @@
   width: 100%;
   min-height: 100vh;
   background: rgb(0, 0, 0, 0.7);
+  
 }
 
 .modal {
@@ -29,5 +30,5 @@
 .modal-synopsis {
   width: 90%;
   border: 1px black solid;
-  padding: 10px
+  padding:
 }
