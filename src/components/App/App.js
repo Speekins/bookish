@@ -10,6 +10,7 @@ const initialState = {
   isLoading: true,
   showModal: false,
   books: {},
+  bookDetail: null,
   myLibrary: [],
   error: false,
   data: null
@@ -91,11 +92,11 @@ const App = () => {
     <Routes>
       <Route
         exact path='/'
-        element={!state.isLoading && <Home books={state.books} />}
+        element={!state.isLoading && <Home books={state.books} showModal={state.showModal} handleModalState={handleModalState}/>}
       />
       <Route
         path='my-library'
-        element={<MyLibrary myLibrary={state.myLibrary} />}
+        element={<MyLibrary myLibrary={state.myLibrary} showModal={state.modalState} handleModalState={handleModalState}/>}
       />
     </Routes>
   )
