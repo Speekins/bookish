@@ -38,10 +38,15 @@ const reducer = (state, action) => {
       }
     case "UNFAVORITE":
       let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
-      let genreType = [...state.books[action.payload.genre]]
-      let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
-      genreType[idx] = action.payload.newBook
-      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
+      if (!action.payload.genre) {
+        return { ...state, isLoading: false, myLibrary: [...library] }
+      } else {
+        let genreType = [...state.books[action.payload.genre]]
+        let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
+        genreType[idx] = action.payload.newBook
+        return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
+      }
+
     case "MODAL":
       let modalState = state.showModal ? false : true
       if (modalState) {
