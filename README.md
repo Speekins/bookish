@@ -18,11 +18,8 @@ This paired project was created as the first `React` project in the third module
 
 ### Research and Documentation 
 Developed Design:
-![image](https://user-images.githubusercontent.com/74210902/207098215-b69a800f-e948-49d6-9486-5dc8f714ca4e.png)
 
-Miro Board Logic Flow:
-First Draft
-![image](https://user-images.githubusercontent.com/74210902/207098450-21590fb0-d428-4c59-8b74-a2ca97ea827d.png)
+Excalidraw Component Logic Flow:
 
 Agile-style project board created and managed via GitHub Projects:
 ![image](https://user-images.githubusercontent.com/74210902/207098755-24a8ab4c-3a94-461d-b181-6fbcdafe7eb6.png)
