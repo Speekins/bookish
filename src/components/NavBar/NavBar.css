@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   margin-bottom: 1vh;
   padding-right: 20px;
   width: 100%;
@@ -10,12 +10,13 @@
 }
 
 .my-library-button,
-.home-button {
+.home-button,
+.search {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px;
-  width: 12%;
+  width: auto;
   font-size: 20px;
   font-family: 'Playfair Display SC', serif;
   text-decoration: none;
@@ -24,8 +25,14 @@
 }
 
 .my-library-button:hover,
-.home-button:hover {
+.home-button:hover,
+.search:hover {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  color: rgb(153, 147, 147)
 }

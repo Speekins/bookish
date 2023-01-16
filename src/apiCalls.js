@@ -19,4 +19,10 @@ const getBookById = (url, id) => {
   .catch(err => console.log(err))
 }
 
-export { getBooks, getBookById }
+const getAwardedBooks = (year) => {
+  return fetch(`https://hapi-books.p.rapidapi.com/top/${year}`, get)
+  .then((response) => response.json())
+  .catch(error => console.log(error))
+} 
+
+export { getBooks, getBookById, getAwardedBooks }

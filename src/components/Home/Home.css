@@ -22,7 +22,7 @@
 .genre {
   display: flex;
   width: 98%;
-  height: 500px;
+  height: 100%;
   margin-bottom: 0;
   margin-left: 30px;
   padding: 10px;

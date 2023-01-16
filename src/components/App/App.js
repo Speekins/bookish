@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { Route, Routes } from 'react-router'
 import Home from '../Home/Home'
 import MyLibrary from '../MyLibrary/MyLibrary'
 import Book from '../Book/Book'
-import { getBooks, getBookById } from '../../apiCalls'
-import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery, singleBook } from '../../production-data'
-const genres = { horror: horror, fiction: fiction, nonFiction: nonFiction, history: history, memoir, scienceFiction: scienceFiction, romance: romance, mystery: mystery }
+import Search from '../Search/Search'
+import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
+import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery } from '../../production-data'
+const genres = { fiction: fiction, nonFiction: nonFiction, mystery: mystery, memoir: memoir, romance: romance, history: history, horror: horror, scienceFiction: scienceFiction }
 
 const initialState = {
   isLoading: true,
   showModal: false,
   books: {},
   bookDetails: null,
+  awardedBooks: [],
   myLibrary: [],
   error: false,
   data: null
@@ -24,18 +26,27 @@ const reducer = (state, action) => {
       return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
     case "FAVORITE":
       let genre = action.payload.genre
-      let id = action.payload.id
-      let newBook = action.payload.newBook
-      let genreList = [...state.books[genre]]
-      let index = genreList.findIndex(book => book.props.book_id === id)
-      genreList[index] = newBook
-      return { ...state, isLoading: false, books: { ...state.books, [genre]: genreList }, myLibrary: [...state.myLibrary, newBook] }
+      if (!genre) {
+        return { ...state, isLoading: false, myLibrary: [...state.myLibrary, action.payload.newBook] }
+      } else {
+        let id = action.payload.id
+        let newBook = action.payload.newBook
+        let genreList = [...state.books[genre]]
+        let index = genreList.findIndex(book => book.props.book_id === id)
+        genreList[index] = newBook
+        return { ...state, isLoading: false, books: { ...state.books, [genre]: genreList }, myLibrary: [...state.myLibrary, newBook] }
+      }
     case "UNFAVORITE":
       let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
-      let genreType = [...state.books[action.payload.genre]]
-      let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
-      genreType[idx] = action.payload.newBook
-      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
+      if (!action.payload.genre) {
+        return { ...state, isLoading: false, myLibrary: [...library] }
+      } else {
+        let genreType = [...state.books[action.payload.genre]]
+        let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
+        genreType[idx] = action.payload.newBook
+        return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
+      }
+
     case "MODAL":
       let modalState = state.showModal ? false : true
       if (modalState) {
@@ -43,9 +54,13 @@ const reducer = (state, action) => {
       } else {
         return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
       }
+    case "SEARCH":
+      return { ...state, isLoading: false, awardedBooks: action.payload }
     case "LOADING":
       let isLoading = action.payload
       return { ...state, isLoading: isLoading }
+    case "CLEAR":
+      return { ...state, books: { ...state.books }, myLibrary: [...state.myLibrary], awardedBooks: [] }
     case "ERROR":
       return { ...state, isLoading: false, error: true }
     default:
@@ -58,16 +73,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    let genreNames = ['horror', 'fiction', 'nonFiction', 'history', 'memoir', 'scienceFiction', 'romance', 'mystery']
-    let allBookData = {}
-    let allBooks
-    const get = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '9d2d319c7amsh0029ddae235525fp1a6a97jsnf0bb69178641',
-        'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com'
-      }
-    }
+    let genreNames = ['fiction', 'nonFiction', 'mystery', 'memoir', 'romance', 'history', 'horror', 'scienceFiction']
 
     const getIt = async () => {
       for (let idx = 0; idx < genreNames.length; idx++) {
@@ -81,10 +87,16 @@ const App = () => {
     }
 
     getIt()
+
+    //PRODUCTION CODE
+    // genreNames.forEach(name => {
+    //   let books = genres[name]
+    //   let formattedBooks = formatBooks(books, name)
+    //   dispatch({ type: "SUCCESS", payload: { books: formattedBooks, genre: name } })
+    // })
   }, [])
 
   const formatBooks = (booksByGenre, genre) => {
-    console.log(booksByGenre)
     let books = booksByGenre.map(book =>
       <Book
         name={book.name}
@@ -99,6 +111,29 @@ const App = () => {
         handleModalState={handleModalState}
       />)
     return books
+  }
+
+  const checkForFavorite = (searchedBooks) => {
+    let libraryBooks = state.myLibrary.map(book => book.props.book_id)
+    return searchedBooks.map(book => {
+      if (libraryBooks.includes(Number(book.props.book_id))) {
+        let likedBook = <Book
+          name={book.props.name}
+          cover={book.props.cover}
+          url={book.props.url}
+          key={book.props.book_id}
+          book_id={book.props.book_id}
+          genre={book.props.genre}
+          liked={true}
+          addToFavorites={addToFavorites}
+          removeFromFavorites={removeFromFavorites}
+          handleModalState={handleModalState}
+        />
+        return likedBook
+      } else {
+        return book
+      }
+    })
   }
 
   const removeFromFavorites = (id, genre, newBook) => {
@@ -120,6 +155,19 @@ const App = () => {
     }
   }
 
+  const searchByYear = (year) => {
+    dispatch({ type: "LOADING", payload: true })
+    getAwardedBooks(year)
+      .then((data) => {
+        let awardedBooks = formatBooks(data, null)
+        dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
+      })
+  }
+
+  const clearSearch = () => {
+    dispatch({ type: "CLEAR" })
+  }
+
   return (
     <Routes>
       <Route
@@ -131,6 +179,7 @@ const App = () => {
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             handleModalState={handleModalState}
+            clearSearch={clearSearch}
           />}
       />
       <Route
@@ -142,6 +191,21 @@ const App = () => {
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             handleModalState={handleModalState}
+            clearSearch={clearSearch}
+          />
+        }
+      />
+      <Route
+        path="search"
+        element={
+          <Search
+            awardedBooks={state.awardedBooks}
+            searchByYear={searchByYear}
+            showModal={state.showModal}
+            bookDetails={state.bookDetails}
+            isLoading={state.isLoading}
+            handleModalState={handleModalState}
+            clearSearch={clearSearch}
           />
         }
       />

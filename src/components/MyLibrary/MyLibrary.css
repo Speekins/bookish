@@ -1,12 +1,30 @@
+.my-library {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
 .my-library-banner {
   width: 100%
 }
 
 .my-library-header {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
   font-size: 80px;
   font-family: 'Nanum Gothic', sans-serif;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.no-books-warning {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-size: 40px;
+  font-family: 'Nanum Gothic', sans-serif;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: rgb(218, 70, 70)
 }
 
 .book-container {
@@ -17,4 +35,5 @@
   row-gap: 2vw;
   padding: 10px;
   align-items: baseline;
+  text-align: center;
 }

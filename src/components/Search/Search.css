@@ -1,0 +1,59 @@
+.search-banner {
+  width: 100%
+}
+
+.search-container {
+  width: 95%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: auto;
+  column-gap: 2vw;
+  row-gap: 2vw;
+  padding: 10px;
+  align-items: baseline;
+}
+
+.search-message {
+  font-size: 22px;
+  width: 70%;
+  text-align: end;
+  padding-right: 20px;
+}
+
+.year-select {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  width: 15%;
+  padding-left: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(181, 168, 168);
+}
+
+.search-bar {
+  font-family: 'Nanum Gothic', sans-serif;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.search-submit {
+  font-family: 'Nanum Gothic', sans-serif;
+  height: auto;
+  font-size: 20px;
+  width: auto;
+  border: none;
+  background-color: white;
+}
+
+.search-submit:hover {
+  border-top: 2px black solid;
+  border-bottom: 2px black solid;
+}
+
+.year {
+  margin-left: 5%;
+  margin-bottom: 0;
+  font-size: 40px;
+}
