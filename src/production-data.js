@@ -79,7 +79,7 @@ const fiction = [
     "name": "All Your Perfects",
     "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1531682842l/38926487.jpg",
     "url": "https://www.goodreads.com/book/show/38926487-all-your-perfects"
-  },
+  }
 ]
 
 const nonFiction = [

@@ -7,7 +7,7 @@ const get = {
 }
 
 const getBooks = (name) => {
-  return fetch(`https://hapi-books.p.rapidapi.com/week/${name}`, get)
+  return fetch(`https://hapi-books.p.rapidapi.com/week/${name}/10`, get)
     .then(response => response.json())
     .catch(err => console.error(err))
 }
