@@ -80,29 +80,31 @@ const App = () => {
   useEffect(() => {
     let genreNames = ['fiction', 'nonFiction', 'mystery', 'memoir', 'romance', 'history', 'horror', 'scienceFiction']
 
-    // const getIt = async () => {
-    //   for (let idx = 0; idx < genreNames.length; idx++) {
-    //     let genre = genreNames[idx]
-    //     await getBooks(genre)
-    //       .then((data) => {
-    //         let books = formatBooks(data, genre)
-    //         if (idx === (genreNames.length - 1)) {
-    //           dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: false } })
-    //         } else {
-    //           dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: true } })
-    //         }
-    //       })
-    //   }
-    // }
+    const getIt = async () => {
+      for (let idx = 0; idx < genreNames.length; idx++) {
+        let genre = genreNames[idx]
+        await getBooks(genre)
+          .then((data) => {
+            if (data.status) {
+              let last = (idx === genreNames.length - 1)
+              dispatch({ type: "SUCCESS", payload: { books: [], genre: genre, isLoading: last ? false : true } })
+            } else {
+              let books = formatBooks(data, genre)
+              let last = (idx === genreNames.length - 1)
+              dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: last ? false : true } })
+            }
+          })
+      }
+    }
 
-    //getIt()
+    getIt()
 
     //PRODUCTION CODE
-    genreNames.forEach(name => {
-      let books = genres[name]
-      let formattedBooks = formatBooks(books, name)
-      dispatch({ type: "SUCCESS", payload: { books: formattedBooks, genre: name } })
-    })
+    // genreNames.forEach(name => {
+    //   let books = genres[name]
+    //   let formattedBooks = formatBooks(books, name)
+    //   dispatch({ type: "SUCCESS", payload: { books: formattedBooks, genre: name } })
+    // })
   }, [])
 
   const formatBooks = (booksByGenre, genre) => {

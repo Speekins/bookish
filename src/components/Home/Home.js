@@ -26,35 +26,35 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       <NavBar clearSearch={clearSearch} view='home' />
       <h1 className='genre-name'>Fiction</h1>
       <div className='genre' id='fiction'>
-        {!isLoading && books.fiction ? books.fiction : warning}
+        {!isLoading && books.fiction ? books.fiction : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>Non-Fiction</h1>
       <div className='genre' id='non-fiction'>
-        {books.nonFiction}
+        {!isLoading && books.nonFiction ? books.nonFiction : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>Mystery</h1>
       <div className='genre' id='mystery'>
-        {books.mystery}
+        {!isLoading && books.mystery ? books.mystery : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>Memoir</h1>
       <div className='genre'>
-        {books.memoir}
+        {!isLoading && books.memoir ? books.memoir : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>Romance</h1>
       <div className='genre'>
-        {books.romance}
+        {!isLoading && books.romance ? books.romance : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>History</h1>
       <div className='genre'>
-        {books.history}
+        {!isLoading && books.history ? books.history : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>Horror</h1>
       <div className='genre'>
-        {books.horror}
+        {!isLoading && books.horror ? books.horror : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
       <h1 className='genre-name'>Science Fiction</h1>
       <div className='genre'>
-        {books.scienceFiction}
+        {!isLoading && books.scienceFiction ? books.scienceFiction : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
     </div>
   )
