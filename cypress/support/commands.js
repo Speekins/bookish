@@ -23,6 +23,12 @@ Cypress.Commands.add('getMoreDetails', () => {
   cy.get('.genre').first().find('img[alt="Cover of The Maid"]').click()
 })
 
+Cypress.Commands.add('addBooksToLibrary', () => {
+  cy.get('.genre').first().find('.heart').first().click()
+  cy.get('.genre').eq(1).find('.heart').first().click()
+  cy.get('.genre').eq(2).find('.heart').first().click()
+})
+
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
