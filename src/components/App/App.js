@@ -60,7 +60,7 @@ const reducer = (state, action) => {
         return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
       }
     case "SEARCH":
-      return { ...state, isLoading: false, awardedBooks: action.payload }
+      return { ...state, isLoading: false, error: false, awardedBooks: action.payload }
     case "LOADING":
       let isLoading = action.payload
       return { ...state, isLoading: isLoading }
@@ -171,8 +171,12 @@ const App = () => {
     dispatch({ type: "LOADING", payload: true })
     getAwardedBooks(year)
       .then((data) => {
-        let awardedBooks = formatBooks(data, null)
-        dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
+        if (data.status) {
+          dispatch({ type: "ERROR" })
+        } else {
+          let awardedBooks = formatBooks(data, null)
+          dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
+        }
       })
   }
 
