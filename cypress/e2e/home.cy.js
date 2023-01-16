@@ -4,14 +4,6 @@ describe('Home page view', () => {
     cy.visitMainPage()
   })
 
-  it('should confirm true equals true', () => {
-    expect(true).to.equal(true)
-  })
-
-  // it('should be able to click on a book to see additional details', () => {
-
-  // })
-
   it('should show current popular books in the fiction genre', () => {
     cy.get('.genre-name').first().should('contain', 'Fiction')
 
@@ -92,12 +84,14 @@ describe('Home page view', () => {
     .should('have.attr', 'src', "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1505590203l/36223860._SY475_.jpg")
   })
 
-  // it('should be able to like a book and have it added to the library', () => {
-    
-  // })
+  it('should be able to like a book', () => {
+    cy.get('.genre').first().find('.heart').first().click()
+    cy.get('.genre').first().find('.heart').first().should('have.attr', 'src', '/static/media/heart-solid.d7c94efcc368b60f1b616ebb888de958.svg')
+  })
 
   it('should be able to click on a book to get additional details', () => {
-    
+    cy.getMoreDetails()
+    cy.get('.modal-container').should('be.visible')
   })
 
 })
