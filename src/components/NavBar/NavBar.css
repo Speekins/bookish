@@ -36,3 +36,9 @@
   pointer-events: none;
   color: rgb(153, 147, 147)
 }
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+  }
+}

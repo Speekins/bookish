@@ -8,8 +8,12 @@ const get = {
 
 const getBooks = (name) => {
   return fetch(`https://hapi-books.p.rapidapi.com/week/${name}/10`, get)
-    .then(response => response.json())
-    .catch(err => console.error(err))
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      return response
+    })
 }
 
 const getBookById = (url, id) => {
@@ -26,8 +30,12 @@ const getBookById = (url, id) => {
 
 const getAwardedBooks = (year) => {
   return fetch(`https://hapi-books.p.rapidapi.com/top/${year}`, get)
-    .then((response) => response.json())
-    .catch(error => console.log(error))
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      return response
+    })
 }
 
 export { getBooks, getBookById, getAwardedBooks }
