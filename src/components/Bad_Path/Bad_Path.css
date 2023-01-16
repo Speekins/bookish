@@ -5,3 +5,21 @@
   justify-content: center;
   min-height: 100vh;
 }
+
+.go-home {
+  font-family: 'Nanum Gothic', sans-serif;
+  height: auto;
+  font-size: 20px;
+  width: auto;
+  margin-top: 20px;
+  border: none;
+  background-color: white;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+
+.go-home:hover {
+  cursor: pointer;
+  border-top: 2px black solid;
+  border-bottom: 2px black solid
+}
