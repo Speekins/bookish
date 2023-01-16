@@ -4,6 +4,7 @@ import Home from '../Home/Home'
 import MyLibrary from '../MyLibrary/MyLibrary'
 import Book from '../Book/Book'
 import Search from '../Search/Search'
+import BadPath from '../Bad_Path/Bad_Path'
 import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
 import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery } from '../../production-data'
 const genres = { fiction: fiction, nonFiction: nonFiction, mystery: mystery, memoir: memoir, romance: romance, history: history, horror: horror, scienceFiction: scienceFiction }
@@ -23,7 +24,11 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "SUCCESS":
-      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
+      if (action.payload.isLoading) {
+        return { ...state, books: { ...state.books, [action.payload.genre]: action.payload.books } }
+      } else {
+        return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
+      }
     case "FAVORITE":
       let genre = action.payload.genre
       if (!genre) {
@@ -81,7 +86,11 @@ const App = () => {
         await getBooks(genre)
           .then((data) => {
             let books = formatBooks(data.slice(0, 10), genre)
-            dispatch({ type: "SUCCESS", payload: { books: books, genre: genre } })
+            if (idx === (genreNames.length - 1)) {
+              dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: false } })
+            } else {
+              dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: true } })
+            }
           })
       }
     }
@@ -183,7 +192,7 @@ const App = () => {
           />}
       />
       <Route
-        path='my-library'
+        path='/my-library'
         element={
           <MyLibrary
             myLibrary={state.myLibrary}
@@ -196,7 +205,7 @@ const App = () => {
         }
       />
       <Route
-        path="search"
+        path="/search"
         element={
           <Search
             awardedBooks={state.awardedBooks}
@@ -209,6 +218,7 @@ const App = () => {
           />
         }
       />
+      <Route path="*" element={<BadPath />} />
     </Routes>
   )
 }

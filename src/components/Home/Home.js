@@ -9,7 +9,7 @@ import Loading from '../assets/images/bookish_loading.png'
 
 const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
 
-const warning = <p className='no-books-warning'>Something went wrong here...</p>
+  const warning = <p className='no-books-warning'>Something went wrong here...</p>
 
   return (
     <div className='home'>
@@ -19,19 +19,18 @@ const warning = <p className='no-books-warning'>Something went wrong here...</p>
       </div>
       {!!isLoading &&
         <div className='loading-container'>
-          <h1>LOADING!</h1>
           <img src={Loading} alt="Loading" className='loading-image' />
         </div>
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
-      <NavBar clearSearch={clearSearch} view='home'/>
+      <NavBar clearSearch={clearSearch} view='home' />
       <h1 className='genre-name'>Fiction</h1>
       <div className='genre'>
         {books.fiction}
       </div>
       <h1 className='genre-name'>Non-Fiction</h1>
       <div className='genre'>
-        {books.nonFiction ? books.nonFiction : warning}
+        {books.nonFiction}
       </div>
       <h1 className='genre-name'>Mystery</h1>
       <div className='genre'>
