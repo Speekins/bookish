@@ -31,7 +31,6 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
       <NavBar clearSearch={clearSearch} view='search' />
       {!!isLoading &&
         <div className='loading-container'>
-          <h1>LOADING!</h1>
           <img src={Loading} alt="Loading" className='loading-image' />
         </div>
       }

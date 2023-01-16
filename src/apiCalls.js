@@ -15,14 +15,19 @@ const getBooks = (name) => {
 const getBookById = (url, id) => {
   url = url + '/' + id
   return fetch(url, get)
-  .then(response => response.json())
-  .catch(err => console.log(err))
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+
+      }
+      return response
+    })
 }
 
 const getAwardedBooks = (year) => {
   return fetch(`https://hapi-books.p.rapidapi.com/top/${year}`, get)
-  .then((response) => response.json())
-  .catch(error => console.log(error))
-} 
+    .then((response) => response.json())
+    .catch(error => console.log(error))
+}
 
 export { getBooks, getBookById, getAwardedBooks }
