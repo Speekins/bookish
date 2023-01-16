@@ -3,9 +3,10 @@ import './Modal.css'
 
 const Modal = ({ handleModalState, bookDetails }) => {
 
-  let authors = bookDetails.authors.join(', ')
-
   if (bookDetails) {
+
+    let authors = bookDetails.authors.join(', ')
+
     return (
       <div className='modal-container'>
         <div className='modal'>
@@ -32,8 +33,10 @@ const Modal = ({ handleModalState, bookDetails }) => {
     return (
       <div className='modal-container'>
         <div className='modal'>
-          <h1>Error...</h1>
-          <button >Close</button>
+          <span className='close-button-container'>
+            <button className='close-modal' onClick={handleModalState}>X</button>
+            <h1 className='no-books-warngin'>Something went wrong...</h1>
+          </span>
         </div>
       </div>
     )

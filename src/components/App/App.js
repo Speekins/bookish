@@ -67,7 +67,7 @@ const reducer = (state, action) => {
     case "CLEAR":
       return { ...state, books: { ...state.books }, myLibrary: [...state.myLibrary], awardedBooks: [] }
     case "ERROR":
-      return { ...state, isLoading: false, error: true }
+      return { ...state, isLoading: false, error: true, bookDetails: null }
     default:
       return state
   }
@@ -80,29 +80,29 @@ const App = () => {
   useEffect(() => {
     let genreNames = ['fiction', 'nonFiction', 'mystery', 'memoir', 'romance', 'history', 'horror', 'scienceFiction']
 
-    const getIt = async () => {
-      for (let idx = 0; idx < genreNames.length; idx++) {
-        let genre = genreNames[idx]
-        await getBooks(genre)
-          .then((data) => {
-            let books = formatBooks(data, genre)
-            if (idx === (genreNames.length - 1)) {
-              dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: false } })
-            } else {
-              dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: true } })
-            }
-          })
-      }
-    }
+    // const getIt = async () => {
+    //   for (let idx = 0; idx < genreNames.length; idx++) {
+    //     let genre = genreNames[idx]
+    //     await getBooks(genre)
+    //       .then((data) => {
+    //         let books = formatBooks(data, genre)
+    //         if (idx === (genreNames.length - 1)) {
+    //           dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: false } })
+    //         } else {
+    //           dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: true } })
+    //         }
+    //       })
+    //   }
+    // }
 
-    getIt()
+    //getIt()
 
     //PRODUCTION CODE
-    // genreNames.forEach(name => {
-    //   let books = genres[name]
-    //   let formattedBooks = formatBooks(books, name)
-    //   dispatch({ type: "SUCCESS", payload: { books: formattedBooks, genre: name } })
-    // })
+    genreNames.forEach(name => {
+      let books = genres[name]
+      let formattedBooks = formatBooks(books, name)
+      dispatch({ type: "SUCCESS", payload: { books: formattedBooks, genre: name } })
+    })
   }, [])
 
   const formatBooks = (booksByGenre, genre) => {
@@ -155,13 +155,16 @@ const App = () => {
 
   const handleModalState = (id) => {
 
-    if (id) {
-      dispatch({ type: "LOADING", payload: true })
-      getBookById("https://hapi-books.p.rapidapi.com/book", id)
-        .then((book) => dispatch({ type: "MODAL", payload: book }))
-    } else {
-      dispatch({ type: "MODAL", payload: null })
-    }
+    dispatch({ type: "LOADING", payload: true })
+    getBookById("https://hapi-books.p.rapidapi.com/book", id)
+      .then((book) => {
+        if (book.status) {
+          dispatch({ type: "ERROR" })
+          dispatch({ type: "MODAL" })
+        } else {
+          dispatch({ type: "MODAL", payload: book })
+        }
+      })
   }
 
   const searchByYear = (year) => {

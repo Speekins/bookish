@@ -11,7 +11,6 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
       <img src={libraryBanner} alt='My Library Banner' className='my-library-banner' />
       {!!isLoading &&
         <div className='loading-container'>
-          <h1>LOADING!</h1>
           <img src={Loading} alt="Loading" className='loading-image' />
         </div>
       }
