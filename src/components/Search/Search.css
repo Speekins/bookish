@@ -28,6 +28,7 @@
   border-radius: 5px;
   border: none;
   background-color: rgb(181, 168, 168);
+  cursor: pointer
 }
 
 .search-bar {
@@ -35,7 +36,7 @@
   display: flex;
   width: 100%;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: baseline
 }
 
 .search-submit {
@@ -45,15 +46,18 @@
   width: auto;
   border: none;
   background-color: white;
+  border-top: 2px transparent solid;
+  border-bottom: 2px transparent solid
 }
 
 .search-submit:hover {
+  cursor: pointer;
   border-top: 2px black solid;
-  border-bottom: 2px black solid;
+  border-bottom: 2px black solid
 }
 
 .year {
   margin-left: 5%;
   margin-bottom: 0;
-  font-size: 40px;
+  font-size: 40px
 }

@@ -9,16 +9,22 @@ const Modal = ({ handleModalState, bookDetails }) => {
     return (
       <div className='modal-container'>
         <div className='modal'>
-          <h1>{bookDetails.name} </h1>
-          <p>({bookDetails.published_date})</p>
-          <p>Author(s): {authors}</p>
-          <p>Rating: {bookDetails.rating}/5</p>
-          <p>Length: {bookDetails.pages} Pages</p>
-          <img className='modal-cover' alt="Cover" src={bookDetails.cover} />
+          <span className='close-button-container'>
+            <button className='close-modal' onClick={handleModalState}>X</button>
+          </span>
+          <h1 className='modal-header'>{bookDetails.name}</h1>
+          <div className='modal-details'>
+            <div>
+              <p><b>Author(s)</b>: {authors}</p>
+              <p><b>Rating</b>: {bookDetails.rating}/5</p>
+              <p><b>Length</b>: {bookDetails.pages} Pages</p>
+              <p><b>Publish Date</b>: {bookDetails.published_date}</p>
+            </div>
+            <img className='modal-cover' alt="Cover" src={bookDetails.cover} />
+          </div>
           <div className='modal-synopsis'>
             <p>{bookDetails.synopsis}</p>
           </div>
-          <button className='close-modal' onClick={handleModalState}>Close</button>
         </div>
       </div>
     )
@@ -27,7 +33,7 @@ const Modal = ({ handleModalState, bookDetails }) => {
       <div className='modal-container'>
         <div className='modal'>
           <h1>Error...</h1>
-          <button className='close-modal' onClick={handleModalState}>Close</button>
+          <button >Close</button>
         </div>
       </div>
     )
