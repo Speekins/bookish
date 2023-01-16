@@ -7,7 +7,7 @@ import Loading from '../assets/images/bookish_loading.png'
 
 const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
   return (
-    <div>
+    <div className='my-library'>
       <img src={libraryBanner} alt='My Library Banner' className='my-library-banner' />
       {!!isLoading &&
         <div className='loading-container'>
@@ -18,8 +18,9 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
       <NavBar clearSearch={clearSearch} view='my-library' />
       <h1 className='my-library-header'>My Library</h1>
+      {!myLibrary.length && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}
       <div className='book-container'>
-        {myLibrary.length ? myLibrary : <h1>No books in your library yet!</h1>}
+        {myLibrary}
       </div>
     </div>
   )
