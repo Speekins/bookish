@@ -29,6 +29,12 @@ Cypress.Commands.add('addBooksToLibrary', () => {
   cy.get('.genre').eq(2).find('.heart').first().click()
 })
 
+Cypress.Commands.add('searchByYear', () => {
+  cy.intercept("https://hapi-books.p.rapidapi.com/top/2013", { fixture: "../fixtures/topbooks2013.json" })
+  cy.get('.year-select').select('2013')
+  cy.get('.search-submit').click()
+})
+
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
