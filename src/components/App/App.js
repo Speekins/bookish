@@ -218,6 +218,7 @@ const App = () => {
             isLoading={state.isLoading}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
+            error={state.error}
           />
         }
       />

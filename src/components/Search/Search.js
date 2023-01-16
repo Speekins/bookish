@@ -5,9 +5,11 @@ import Modal from '../Modal/Modal'
 import banner from '../assets/images/search_banner.jpg'
 import Loading from '../assets/images/bookish_loading.png'
 
-const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
+const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookDetails, isLoading, clearSearch, error }) => {
 
   const [year, setYear] = useState('')
+
+  const warning = <p className='no-books-warning'>Something went wrong here...</p>
 
   let yearSelect =
     <select name="year-select" value={year} className="year-select" onChange={(e) => setYear(e.target.value)}>
@@ -42,6 +44,7 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
       <div className='search-container'>
         {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
         {!!awardedBooks.length && awardedBooks}
+        {error && warning}
       </div>
     </div>
   )

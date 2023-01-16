@@ -26,7 +26,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       <NavBar clearSearch={clearSearch} view='home' />
       <h1 className='genre-name'>Fiction</h1>
       <div className='genre' id='fiction'>
-        {books.fiction}
+        {!isLoading && books.fiction ? books.fiction : warning}
       </div>
       <h1 className='genre-name'>Non-Fiction</h1>
       <div className='genre' id='non-fiction'>
