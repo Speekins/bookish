@@ -1,6 +1,5 @@
 describe('Home page view', () => {
   beforeEach(() => {
-
     cy.visitMainPage()
   })
 
@@ -96,11 +95,15 @@ describe('Home page view', () => {
 
 })
 
-// describe('Home Page Errors', () => {
+// describe('Home Page Error Handling', () => {
 
 //   beforeEach(() => {
 
 //   })
+
+    // it('should have the home button disabled while viewing home page', () => {
+      
+    // })
 
 //   it('should allow warn the user if a bad URL path is entered', () => {
     
