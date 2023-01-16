@@ -25,15 +25,15 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
       <NavBar clearSearch={clearSearch} view='home' />
       <h1 className='genre-name'>Fiction</h1>
-      <div className='genre'>
+      <div className='genre' id='fiction'>
         {books.fiction}
       </div>
       <h1 className='genre-name'>Non-Fiction</h1>
-      <div className='genre'>
+      <div className='genre' id='non-fiction'>
         {books.nonFiction}
       </div>
       <h1 className='genre-name'>Mystery</h1>
-      <div className='genre'>
+      <div className='genre' id='mystery'>
         {books.mystery}
       </div>
       <h1 className='genre-name'>Memoir</h1>

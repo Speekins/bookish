@@ -1,20 +1,20 @@
 Cypress.Commands.add('visitMainPage', () => {
-  cy.intercept('https://hapi-books.p.rapidapi.com/week/fiction', { fixture: '../fixtures/fiction.json' }).as('fiction')
-  // cy.wait('@fiction')
-  cy.intercept('https://hapi-books.p.rapidapi.com/week/nonFiction', { fixture: '../fixtures/nonfiction.json' }).as('nonFiction')
-  //cy.wait('@nonFiction')
-  cy.intercept('https://hapi-books.p.rapidapi.com/week/history', { fixture: '../fixtures/history.json' }).as('history')
-  //cy.wait('@history')
-  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/memoir', { fixture: '../fixtures/memoir.json' }).as('memoir')
-  //cy.wait('@memoir')
-  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/mystery', { fixture: '../fixtures/mystery.json' }).as('mystery')
-  //cy.wait('@mystery')
-  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/romance', { fixture: '../fixtures/romance.json' }).as('romance')
-  //cy.wait('@romance')
-  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/scienceFiction', { fixture: '../fixtures/sciencefiction.json' }).as('scienceFiction')
-  //cy.wait('@scienceFiction')
-  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/horror', { fixture: '../fixtures/horror.json' }).as('horror')
-  //cy.wait('@horror')
+  cy.intercept('https://hapi-books.p.rapidapi.com/week/fiction/10', { fixture: '../fixtures/fiction.json' }).as('fiction')
+
+  cy.intercept('https://hapi-books.p.rapidapi.com/week/nonFiction/10', { fixture: '../fixtures/nonfiction.json' }).as('nonFiction')
+  
+  cy.intercept('https://hapi-books.p.rapidapi.com/week/history/10', { fixture: '../fixtures/history.json' }).as('history')
+ 
+  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/memoir/10', { fixture: '../fixtures/memoir.json' }).as('memoir')
+
+  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/mystery/10', { fixture: '../fixtures/mystery.json' }).as('mystery')
+ 
+  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/romance/10', { fixture: '../fixtures/romance.json' }).as('romance')
+
+  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/scienceFiction/10', { fixture: '../fixtures/sciencefiction.json' }).as('scienceFiction')
+
+  cy.intercept('GET', 'https://hapi-books.p.rapidapi.com/week/horror/10', { fixture: '../fixtures/horror.json' }).as('horror')
+
   cy.visit('http://localhost:3000')
 })
 

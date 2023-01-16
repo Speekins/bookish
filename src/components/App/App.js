@@ -85,7 +85,7 @@ const App = () => {
         let genre = genreNames[idx]
         await getBooks(genre)
           .then((data) => {
-            let books = formatBooks(data.slice(0, 10), genre)
+            let books = formatBooks(data, genre)
             if (idx === (genreNames.length - 1)) {
               dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: false } })
             } else {
