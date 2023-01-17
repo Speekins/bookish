@@ -15,13 +15,13 @@ const Modal = ({ handleModalState, bookDetails }) => {
           </span>
           <h1 className='modal-header'>{bookDetails.name}</h1>
           <div className='modal-details'>
+            <img className='modal-cover' alt="Cover" src={bookDetails.cover} />
             <div>
               <p><b>Author(s)</b>: {authors}</p>
               <p><b>Rating</b>: {bookDetails.rating}/5</p>
               <p><b>Length</b>: {bookDetails.pages} Pages</p>
               <p><b>Publish Date</b>: {bookDetails.published_date}</p>
             </div>
-            <img className='modal-cover' alt="Cover" src={bookDetails.cover} />
           </div>
           <div className='modal-synopsis'>
             <p>{bookDetails.synopsis}</p>
