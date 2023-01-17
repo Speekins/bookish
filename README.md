@@ -1,34 +1,32 @@
 # **BOOKISH**
+[Deployed Link](https://bookish-beta.vercel.app/)
 
 ### Home Page
+<img width="1348" alt="image" src="https://user-images.githubusercontent.com/74210902/212802364-bc0546db-b7de-4a27-9b1f-ba9d824afecc.png">
 
 ### "My Library"
+<img width="1166" alt="image" src="https://user-images.githubusercontent.com/74210902/212802573-88025fb7-796d-4b18-ade7-3b7e7392ddb3.png">
 
 ### Book Details Modal
+<img width="1258" alt="image" src="https://user-images.githubusercontent.com/74210902/212802765-95979b0b-9350-4582-8df3-32ed36085cf6.png">
 
 ### Popular Book Search
+<img width="1340" alt="image" src="https://user-images.githubusercontent.com/74210902/212802882-81c377a9-8f2a-4b47-8add-68b1b9b48bd3.png">
 
 ### Abstract
-Neatflix is a movie review web application that pulls in data from a movie API and displays the results to the user. The target user ranges from cinephile to casual movie watcher wanting to find a movie to watch based on its ratings and reviews. The user flow first shows all movies on the main page, where the user may search for a specific title. Once that title is found, the movie poster can be clicked on to view more details (depending on source data) about the film, including rating, budget, release date, and the option to view the trailer.
+Bookish is a book information application providing the most up-to-date list of top-rated books from week-to-week. Users are able to scroll through these books according to 8 different genre selections. Additionally, a user can "favorite" a book they would like to read, having it sent to "My Library". Finally, if a user does not see a book they like, they can look at the most awarded books from years past.<br>
+The target user for this application are individuals who are readers with very busy lives, yet want to keep up-to-date with current popular books, and save them to be read later. The user flow first shows all genres, with 10 of the top books apiece. If the user would like additional information, the user can click on the book cover and be presented with a modal with the authoor's name, book grade, year published, and synopsis. If the book is "favorited", the heart will fill in and that book will then appear in "My Library" to be saved for later. Th user logically can also proceed to the Search page (via the navbar) where the user may search for books by year.
 
-This paired project was created as the first `React` project in the third module (of four) of the Turing front-end software engineering program. This project is the culmination of gained experience and knowledge listed under the `Technologies` heading below.
+This project was created as the final showcase of skills gained in `React` over the course of the third module (of four) of the Turing front-end software engineering program. This project is the culmination of gained experience and knowledge listed under the `Technologies` heading below.
 
 ### Contributors
 [Spencer Haka](https://github.com/Speekins)
 
-### Research and Documentation 
-Developed Design:
-
-Excalidraw Component Logic Flow:
-
-Agile-style project board created and managed via GitHub Projects:
-![image](https://user-images.githubusercontent.com/74210902/207098755-24a8ab4c-3a94-461d-b181-6fbcdafe7eb6.png)
-
 ### Reflection
 - Wins
-  - Successfully using React to create our first application
+  - Successfully using React to create a web application
   - Using Router to make a dynamic webpage that re-directs the URL path
-  - Learning to effectively implement Cypress to test all user views
+  - The implementation of Cypress testing framework to test all views
 - Challenges
   - Managing state with `useReducer`
   - Fetching several sources of data on page load
@@ -68,5 +66,6 @@ Agile-style project board created and managed via GitHub Projects:
 ### Installation Instructions
 1. Fork this repository.
 2. Clone your new, forked repository to your local machine.
-3. `cd` into the API repository on your local machine and run `npm install`, then `npm start` to launch the application.
+3. `cd` into the Bookish repository and run `npm install`
+4. Run `npm start`
 4. The application will automatically load and be visiible in your web browser.
