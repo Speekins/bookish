@@ -15,6 +15,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
     <div className='home'>
       <div className='banner'>
         <img alt="Banner with books" className='banner-image' src={Banner} />
+        <div className='bookish overlay'></div>
         <h1 className='bookish'>BOOKISH</h1>
       </div>
       {!!isLoading &&
