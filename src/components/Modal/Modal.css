@@ -75,3 +75,34 @@
   border-bottom: 2px black solid
 }
 
+@media (max-width: 1000px) {
+
+  .modal-cover {
+    height: 40vh;
+  }
+  
+}
+
+@media (max-width: 850px) {
+
+  .modal-details {
+    font-size: 18px;
+  }
+
+  .modal-cover {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .modal-details {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-header {
+    font-size: 25px
+  }
+}
