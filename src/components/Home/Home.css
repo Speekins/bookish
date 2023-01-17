@@ -19,6 +19,17 @@
   border: 4px solid white;
 }
 
+.overlay {
+  top: 25%;
+  left: 60%;
+  transform: translate(-50%, 6%);
+  border: none;
+  background-color: rgb(38, 36, 36);
+  opacity: 0.6;
+  height: 215px;
+  width: 795px
+}
+
 .genre {
   display: flex;
   width: 98%;
@@ -84,6 +95,11 @@
   .bookish {
     font-size: 100px;
   }
+
+  .overlay {
+    height: 120px;
+    width: 450px
+  }
 }
 
 @media (max-width: 600px) {
@@ -93,5 +109,10 @@
 
   .genre-name {
     font-size: 40px;
+  }
+  
+  .overlay {
+    height: 65px;
+    width: 255px
   }
 }
