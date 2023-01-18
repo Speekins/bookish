@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import Book from '../Book/Book'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Banner from '../assets/images/books1.jpg'
 import '../NavBar/NavBar'
 import './Home.css'
@@ -59,6 +59,15 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       </div>
     </div>
   )
+}
+
+Home.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.elementType),
+  showModal: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  handleModalState: PropTypes.func.isRequired,
+  clearSearch: PropTypes.func.isRequired,
+  bookDetails: PropTypes.object,
 }
 
 export default Home

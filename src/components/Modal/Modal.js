@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Modal.css'
 
 const Modal = ({ handleModalState, bookDetails }) => {
@@ -41,6 +42,11 @@ const Modal = ({ handleModalState, bookDetails }) => {
       </div>
     )
   }
+}
+
+Modal.protoTypes = {
+  handleModalState: PropTypes.func.isRequired,
+  bookDetails: PropTypes.object
 }
 
 export default Modal

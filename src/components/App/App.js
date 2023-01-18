@@ -6,8 +6,6 @@ import Book from '../Book/Book'
 import Search from '../Search/Search'
 import BadPath from '../Bad_Path/Bad_Path'
 import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
-import { horror, fiction, nonFiction, history, memoir, scienceFiction, romance, mystery } from '../../production-data'
-const genres = { fiction: fiction, nonFiction: nonFiction, mystery: mystery, memoir: memoir, romance: romance, history: history, horror: horror, scienceFiction: scienceFiction }
 
 const initialState = {
   isLoading: true,
@@ -98,13 +96,6 @@ const App = () => {
     }
 
     getIt()
-
-    //PRODUCTION CODE
-    // genreNames.forEach(name => {
-    //   let books = genres[name]
-    //   let formattedBooks = formatBooks(books, name)
-    //   dispatch({ type: "SUCCESS", payload: { books: formattedBooks, genre: name } })
-    // })
   }, [])
 
   const formatBooks = (booksByGenre, genre) => {

@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react'
-//import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import './Book.css'
 import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
-const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, handleModalState, genre, liked }) => {
+const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeFromFavorites, handleModalState }) => {
 
   const [isFavorite, setIsFavorite] = useState(liked)
 
@@ -57,13 +57,25 @@ const Book = ({ book_id, name, cover, url, addToFavorites, removeFromFavorites, 
 
   return (
     <div className='book'>
-      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" onClick={() => handleModalState(book_id)}/>
+      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" onClick={() => handleModalState(book_id)} />
       <div className='title'>
         {isFavorite === true ? favorite : unFavorite}
         <p className='name'>{name}</p>
       </div>
     </div>
   )
+}
+
+Book.propTypes = {
+  book_id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  cover: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  addToFavorites: PropTypes.func.isRequired,
+  removeFromFavorites: PropTypes.func.isRequired,
+  handleModalState: PropTypes.func
 }
 
 export default Book 

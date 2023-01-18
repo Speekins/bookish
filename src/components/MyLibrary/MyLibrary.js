@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes, { bool } from "prop-types"
 import libraryBanner from '../assets/images/my-library-banner.jpg'
 import './MyLibrary.css'
 import NavBar from '../NavBar/NavBar'
@@ -23,6 +24,15 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
       </div>
     </div>
   )
+}
+
+MyLibrary.propTypes = {
+  myLibrary: PropTypes.arrayOf(PropTypes.elementType).isRequired,
+  handleModalState: PropTypes.func.isRequired,
+  clearSearch: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  bookDetails: PropTypes.object,
 }
 
 export default MyLibrary
