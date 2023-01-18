@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import './Search.css'
 import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
@@ -49,6 +50,17 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
       </div>
     </div>
   )
+}
+
+Search.propTypes = {
+  awardedBooks: PropTypes.arrayOf(PropTypes.elementType),
+  searchByYear: PropTypes.func,
+  showModal: PropTypes.bool,
+  handleModalState: PropTypes.func,
+  bookDetails: PropTypes.object,
+  isLoading: PropTypes.bool,
+  clearSearch: PropTypes.func,
+  error: PropTypes.bool
 }
 
 export default Search
