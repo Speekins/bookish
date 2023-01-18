@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Proptypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './NavBar.css'
 
@@ -27,6 +28,11 @@ const NavBar = ({ clearSearch, view }) => {
       >Past Popular</NavLink>
     </div >
   )
+}
+
+NavBar.propTypes = {
+  clearSearch: Proptypes.func.isRequired,
+  view: Proptypes.string.isRequired
 }
 
 export default NavBar

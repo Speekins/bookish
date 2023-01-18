@@ -63,10 +63,10 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
 
 Home.propTypes = {
   books: PropTypes.arrayOf(PropTypes.elementType),
-  showModal: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  handleModalState: PropTypes.func,
-  clearSearch: PropTypes.func,
+  showModal: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  handleModalState: PropTypes.func.isRequired,
+  clearSearch: PropTypes.func.isRequired,
   bookDetails: PropTypes.object,
 }
 

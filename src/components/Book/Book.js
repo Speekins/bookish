@@ -67,14 +67,14 @@ const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeF
 }
 
 Book.propTypes = {
-  book_id: PropTypes.number,
-  name: PropTypes.string,
-  cover: PropTypes.string,
-  url: PropTypes.string,
-  genre: PropTypes.string,
-  liked: PropTypes.bool,
-  addToFavorites: PropTypes.func,
-  removeFromFavorites: PropTypes.func,
+  book_id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  cover: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  addToFavorites: PropTypes.func.isRequired,
+  removeFromFavorites: PropTypes.func.isRequired,
   handleModalState: PropTypes.func
 }
 

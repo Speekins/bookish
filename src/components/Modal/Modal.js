@@ -45,7 +45,7 @@ const Modal = ({ handleModalState, bookDetails }) => {
 }
 
 Modal.protoTypes = {
-  handleModalState: PropTypes.func,
+  handleModalState: PropTypes.func.isRequired,
   bookDetails: PropTypes.object
 }
 
