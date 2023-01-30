@@ -10,6 +10,7 @@ import Loading from '../assets/images/bookish_loading.png'
 const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
 
   const warning = <p className='no-books-warning'>Something went wrong here...</p>
+  const genre = Object.keys(books)[0]
 
   return (
     <div className='home'>
@@ -25,37 +26,10 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
       <NavBar clearSearch={clearSearch} view='home' />
-      <h1 className='genre-name'>Fiction</h1>
-      <div className='genre' id='fiction'>
-        {!isLoading && books.fiction ? books.fiction : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>Non-Fiction</h1>
-      <div className='genre' id='non-fiction'>
-        {!isLoading && books.nonFiction ? books.nonFiction : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>Mystery</h1>
-      <div className='genre' id='mystery'>
-        {!isLoading && books.mystery ? books.mystery : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>Memoir</h1>
-      <div className='genre'>
-        {!isLoading && books.memoir ? books.memoir : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>Romance</h1>
-      <div className='genre'>
-        {!isLoading && books.romance ? books.romance : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>History</h1>
-      <div className='genre'>
-        {!isLoading && books.history ? books.history : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>Horror</h1>
-      <div className='genre'>
-        {!isLoading && books.horror ? books.horror : (!!isLoading ? <p>Loading...</p> : warning)}
-      </div>
-      <h1 className='genre-name'>Science Fiction</h1>
-      <div className='genre'>
-        {!isLoading && books.scienceFiction ? books.scienceFiction : (!!isLoading ? <p>Loading...</p> : warning)}
+      <></>
+      <h1 className='genre-name'>{genre}</h1>
+      <div className='genre' id={genre}>
+        {!isLoading && books[genre] ? books[genre] : (!!isLoading ? <p>Loading...</p> : warning)}
       </div>
     </div>
   )
