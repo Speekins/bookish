@@ -129,6 +129,17 @@ const App = () => {
     })
   }
 
+  const getGenre = (genre) => {
+    getBooks(genre)
+      .then((data) => {
+        if (data.status) {
+          dispatch({ type: "SUCCESS", payload: { books: [], isLoading: false} })
+        } else {
+          let books = formatBooks(data, genre)
+          dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: false } })
+        }
+      })
+  }
   const removeFromFavorites = (id, genre, newBook) => {
     dispatch({ type: "UNFAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
   }
@@ -180,6 +191,7 @@ const App = () => {
             isLoading={state.isLoading}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
+            getGenre={getGenre}
           />}
       />
       <Route

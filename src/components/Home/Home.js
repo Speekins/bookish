@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Banner from '../assets/images/books1.jpg'
 import '../NavBar/NavBar'
@@ -7,11 +7,18 @@ import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 import Loading from '../assets/images/bookish_loading.png'
 
-const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clearSearch }) => {
+const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clearSearch, getGenre }) => {
 
+  const [genre, setGenre] = useState(Object.keys(books)[0])
   const warning = <p className='no-books-warning'>Something went wrong here...</p>
-  const genre = Object.keys(books)[0]
-
+  const currentGenre = Object.keys(books)[0]
+  let genreNames = ['fiction', 'nonFiction', 'mystery', 'memoir', 'romance', 'history', 'horror', 'scienceFiction']
+  let options = genreNames.map(genreName => {
+    if (genreName !== currentGenre) {
+      return <option value={genreName}>{genreName}</option>
+    }
+  })
+    
   return (
     <div className='home'>
       <div className='banner'>
@@ -26,7 +33,10 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       }
       {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
       <NavBar clearSearch={clearSearch} view='home' />
-      <></>
+      <select name="year-select" value={genre} className="year-select" onChange={(e) => setGenre(e.target.value)}>
+        {options}
+      </select>
+      <button className='get-genre' onClick={() => getGenre(genre)}></button>
       <h1 className='genre-name'>{genre}</h1>
       <div className='genre' id={genre}>
         {!isLoading && books[genre] ? books[genre] : (!!isLoading ? <p>Loading...</p> : warning)}
@@ -36,7 +46,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
 }
 
 Home.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.elementType),
+  //books: PropTypes.arrayOf(PropTypes.elementType),
   showModal: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   handleModalState: PropTypes.func.isRequired,
