@@ -22,11 +22,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "SUCCESS":
-      if (action.payload.isLoading) {
-        return { ...state, books: { ...state.books, [action.payload.genre]: action.payload.books } }
-      } else {
-        return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
-      }
+      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
     case "FAVORITE":
       let genre = action.payload.genre
       if (!genre) {
@@ -75,37 +71,24 @@ const App = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  useEffect(() => {
-    let genreNames = ['fiction', 'nonFiction', 'mystery', 'memoir', 'romance', 'history', 'horror', 'scienceFiction']
+  let genreNames = ["humor", "science", "health", "food-and-fitness", "education", "business-books", "culture", "celebrities", "advice-how-to-and-miscellaneous", "paperback-nonfiction", "hardcover-nonfiction", "hardcover-fiction", "picture-books"]
 
-    const getIt = async () => {
-      for (let idx = 0; idx < genreNames.length; idx++) {
-        let genre = genreNames[idx]
-        await getBooks(genre)
-          .then((data) => {
-            if (data.status) {
-              let last = (idx === genreNames.length - 1)
-              dispatch({ type: "SUCCESS", payload: { books: [], genre: genre, isLoading: last ? false : true } })
-            } else {
-              let books = formatBooks(data, genre)
-              let last = (idx === genreNames.length - 1)
-              dispatch({ type: "SUCCESS", payload: { books: books, genre: genre, isLoading: last ? false : true } })
-            }
-          })
-      }
-    }
-
-    getIt()
-  }, [])
+  const getIt = async (genre) => {
+    await getBooks(genre)
+      .then((data) => {
+        console.log(data.results.books)
+        dispatch({ type: "SUCCESS", payload: { books: formatBooks(data.results.books, "fiction"), genre: "fiction" } })
+      })
+  }
 
   const formatBooks = (booksByGenre, genre) => {
-    let books = booksByGenre.map(book =>
+    let books = booksByGenre.map((book, idx) =>
       <Book
-        name={book.name}
-        cover={book.cover}
-        url={book.url}
-        key={book.book_id}
-        book_id={book.book_id}
+        name={book.title}
+        cover={book.book_image}
+        url={book.amazon_product_url}
+        key={idx}
+        rank={book.rank}
         genre={genre}
         liked={false}
         addToFavorites={addToFavorites}
@@ -189,6 +172,7 @@ const App = () => {
             isLoading={state.isLoading}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
+            getIt={getIt}
           />}
       />
       <Route

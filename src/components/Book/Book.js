@@ -66,16 +66,16 @@ const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeF
   )
 }
 
-Book.propTypes = {
-  book_id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  cover: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  liked: PropTypes.bool.isRequired,
-  addToFavorites: PropTypes.func.isRequired,
-  removeFromFavorites: PropTypes.func.isRequired,
-  handleModalState: PropTypes.func
-}
+// Book.propTypes = {
+//   book_id: PropTypes.number.isRequired,
+//   name: PropTypes.string.isRequired,
+//   cover: PropTypes.string.isRequired,
+//   url: PropTypes.string.isRequired,
+//   genre: PropTypes.string.isRequired,
+//   liked: PropTypes.bool.isRequired,
+//   addToFavorites: PropTypes.func.isRequired,
+//   removeFromFavorites: PropTypes.func.isRequired,
+//   handleModalState: PropTypes.func
+// }
 
 export default Book 
