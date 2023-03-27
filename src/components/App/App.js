@@ -24,17 +24,7 @@ const reducer = (state, action) => {
     case "SUCCESS":
       return { ...state, isLoading: false, books: action.payload.books }
     case "FAVORITE":
-      let genre = action.payload.genre
-      if (!genre) {
-        return { ...state, isLoading: false, myLibrary: [...state.myLibrary, action.payload.newBook] }
-      } else {
-        let id = action.payload.id
-        let newBook = action.payload.newBook
-        let genreList = [...state.books[genre]]
-        let index = genreList.findIndex(book => book.props.book_id === id)
-        genreList[index] = newBook
-        return { ...state, isLoading: false, books: { ...state.books, [genre]: genreList }, myLibrary: [...state.myLibrary, newBook] }
-      }
+      return { ...state, books: action.payload.books, myLibrary: [...state.myLibrary, action.payload.favorite] }
     case "UNFAVORITE":
       let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
       if (!action.payload.genre) {
@@ -71,33 +61,12 @@ const App = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  let genreNames = ["humor", "science", "health", "food-and-fitness", "education", "business-books", "culture", "celebrities", "advice-how-to-and-miscellaneous", "paperback-nonfiction", "hardcover-nonfiction", "hardcover-fiction", "picture-books"]
-
   const getIt = async (genre) => {
     await getBooks(genre)
       .then((data) => {
         dispatch({ type: "SUCCESS", payload: { books: data.results.books, genre: "fiction" } })
       })
   }
-
-  // const formatBooks = (booksByGenre, genre) => {
-  //   let books = booksByGenre.map((book, idx) =>
-  //     <Book
-  //       name={book.title}
-  //       cover={book.book_image}
-  //       url={book.amazon_product_url}
-  //       key={idx}
-  //       rank={book.rank}
-  //       genre={genre}
-  //       weeks_on_list={book.weeks_on_list}
-  //       description={book.description}
-  //       liked={false}
-  //       addToFavorites={addToFavorites}
-  //       removeFromFavorites={removeFromFavorites}
-  //       handleModalState={handleModalState}
-  //     />)
-  //   return books
-  // }
 
   const checkForFavorite = (searchedBooks) => {
     let libraryBooks = state.myLibrary.map(book => book.props.book_id)
@@ -123,12 +92,22 @@ const App = () => {
     })
   }
 
-  const removeFromFavorites = (id, genre, newBook) => {
-    dispatch({ type: "UNFAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
+  const removeFromFavorites = (isbn) => {
+
+    dispatch({ type: "UNFAVORITE", payload: "nothing" })
   }
 
-  const addToFavorites = (id, genre, newBook) => {
-    dispatch({ type: "FAVORITE", payload: { id: id, genre: genre, newBook: newBook } })
+  const addToFavorites = (isbn) => {
+    let books = [...state.books]
+    let favorite
+    books.map(book => {
+      if (book.primary_isbn13 === isbn) {
+        book.isFavorite = true
+        favorite = book
+        return book
+      } else { return book }
+    })
+    dispatch({ type: "FAVORITE", payload: { books: books, favorite: favorite } })
   }
 
   const handleModalState = (id) => {
@@ -162,6 +141,7 @@ const App = () => {
     dispatch({ type: "CLEAR" })
   }
 
+  console.log(state.myLibrary)
   return (
     <Routes>
       <Route
