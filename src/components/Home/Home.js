@@ -29,9 +29,10 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
   if (books.length) {
     let booksToDisplay = books.map((book, idx) =>
       <Book
-        name={book.title}
+        title={book.title}
         cover={book.book_image}
         url={book.amazon_product_url}
+        author={book.contributor}
         key={idx}
         rank={book.rank}
         genre={genreSelection}
