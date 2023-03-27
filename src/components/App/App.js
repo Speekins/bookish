@@ -22,7 +22,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "SUCCESS":
-      return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: action.payload.books } }
+      return { ...state, isLoading: false, books: action.payload.books }
     case "FAVORITE":
       let genre = action.payload.genre
       if (!genre) {
@@ -76,27 +76,28 @@ const App = () => {
   const getIt = async (genre) => {
     await getBooks(genre)
       .then((data) => {
-        console.log(data.results.books)
-        dispatch({ type: "SUCCESS", payload: { books: formatBooks(data.results.books, "fiction"), genre: "fiction" } })
+        dispatch({ type: "SUCCESS", payload: { books: data.results.books, genre: "fiction" } })
       })
   }
 
-  const formatBooks = (booksByGenre, genre) => {
-    let books = booksByGenre.map((book, idx) =>
-      <Book
-        name={book.title}
-        cover={book.book_image}
-        url={book.amazon_product_url}
-        key={idx}
-        rank={book.rank}
-        genre={genre}
-        liked={false}
-        addToFavorites={addToFavorites}
-        removeFromFavorites={removeFromFavorites}
-        handleModalState={handleModalState}
-      />)
-    return books
-  }
+  // const formatBooks = (booksByGenre, genre) => {
+  //   let books = booksByGenre.map((book, idx) =>
+  //     <Book
+  //       name={book.title}
+  //       cover={book.book_image}
+  //       url={book.amazon_product_url}
+  //       key={idx}
+  //       rank={book.rank}
+  //       genre={genre}
+  //       weeks_on_list={book.weeks_on_list}
+  //       description={book.description}
+  //       liked={false}
+  //       addToFavorites={addToFavorites}
+  //       removeFromFavorites={removeFromFavorites}
+  //       handleModalState={handleModalState}
+  //     />)
+  //   return books
+  // }
 
   const checkForFavorite = (searchedBooks) => {
     let libraryBooks = state.myLibrary.map(book => book.props.book_id)
@@ -109,6 +110,7 @@ const App = () => {
           key={book.props.book_id}
           book_id={book.props.book_id}
           genre={book.props.genre}
+          description={book.description}
           liked={true}
           addToFavorites={addToFavorites}
           removeFromFavorites={removeFromFavorites}
@@ -150,7 +152,7 @@ const App = () => {
         if (data.status) {
           dispatch({ type: "ERROR" })
         } else {
-          let awardedBooks = formatBooks(data, null)
+          let awardedBooks = data.results.books
           dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
         }
       })
@@ -172,6 +174,8 @@ const App = () => {
             isLoading={state.isLoading}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
             getIt={getIt}
           />}
       />
