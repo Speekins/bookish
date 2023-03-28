@@ -26,16 +26,7 @@ const reducer = (state, action) => {
     case "FAVORITE":
       return { ...state, books: action.payload.books, myLibrary: [...state.myLibrary, action.payload.favorite] }
     case "UNFAVORITE":
-      let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
-      if (!action.payload.genre) {
-        return { ...state, isLoading: false, myLibrary: [...library] }
-      } else {
-        let genreType = [...state.books[action.payload.genre]]
-        let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
-        genreType[idx] = action.payload.newBook
-        return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
-      }
-
+      return { ...state, books: action.payload.books, myLibrary: action.payload.myLibrary }
     case "MODAL":
       let modalState = state.showModal ? false : true
       if (modalState) {
@@ -93,8 +84,15 @@ const App = () => {
   }
 
   const removeFromFavorites = (isbn) => {
-
-    dispatch({ type: "UNFAVORITE", payload: "nothing" })
+    let books = [...state.books]
+    let myLibrary = state.myLibrary.filter(book => book.primary_isbn13 !== isbn)
+    books.map(book => {
+      if (book.primary_isbn13 === isbn) {
+        book.isFavorite = false
+        return book
+      } else { return book }
+    })
+    dispatch({ type: "UNFAVORITE", payload: { books: books, myLibrary: myLibrary } })
   }
 
   const addToFavorites = (isbn) => {

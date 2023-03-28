@@ -17,7 +17,6 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
   useEffect(() => {
     let fetchData = async () => {
       await getIt(genreSelection)
-      console.log(genreSelection)
       setDisplayGenre(formatGenre(genreSelection))
     }
 
