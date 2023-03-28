@@ -1,0 +1,49 @@
+.book-variant {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.book-variant-cover {
+  width: 250px;
+  height: auto;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.book-variant-cover:hover {
+  border-top: 5px solid rgb(238, 200, 62);
+  border-bottom: 5px solid rgb(238, 200, 62);
+  cursor: pointer;
+}
+
+.book-variant-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 14px;
+}
+
+.book-variant-heart {
+  height: 30px;
+  fill: white;
+  transition-duration: 200ms;
+  margin-right: 15px
+}
+
+.book-variant-heart:hover {
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .book-variant-cover {
+    width: 200px
+  }
+}

@@ -29,11 +29,12 @@ const reducer = (state, action) => {
       return { ...state, books: action.payload.books, myLibrary: action.payload.myLibrary }
     case "MODAL":
       let modalState = state.showModal ? false : true
-      if (modalState) {
-        return { ...state, showModal: modalState, bookDetails: action.payload, isLoading: false }
-      } else {
-        return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
-      }
+      return { ...state, showModal: modalState }
+    // if (modalState) {
+    //   return { ...state, showModal: modalState, bookDetails: action.payload, isLoading: false }
+    // } else {
+    //   return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
+    // }
     case "SEARCH":
       return { ...state, isLoading: false, error: false, awardedBooks: action.payload }
     case "LOADING":
@@ -59,24 +60,12 @@ const App = () => {
       })
   }
 
-  const checkForFavorite = (searchedBooks) => {
-    let libraryBooks = state.myLibrary.map(book => book.props.book_id)
-    return searchedBooks.map(book => {
-      if (libraryBooks.includes(Number(book.props.book_id))) {
-        let likedBook = <Book
-          name={book.props.name}
-          cover={book.props.cover}
-          url={book.props.url}
-          key={book.props.book_id}
-          book_id={book.props.book_id}
-          genre={book.props.genre}
-          description={book.description}
-          liked={true}
-          addToFavorites={addToFavorites}
-          removeFromFavorites={removeFromFavorites}
-          handleModalState={handleModalState}
-        />
-        return likedBook
+  const checkForFavorite = (books) => {
+    let myLibraryISBN = state.myLibrary.map(book => book.primary_isbn13)
+    return books.map(book => {
+      if (myLibraryISBN.includes(book.primary_isbn13)) {
+        book.isFavorite = true
+        return book
       } else {
         return book
       }

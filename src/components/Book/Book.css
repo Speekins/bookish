@@ -92,9 +92,8 @@
 }
 
 .heart {
-  height: 65px;
+  height: 55px;
   transition-duration: 200ms;
-  color: rgb(233, 83, 83);
   filter: invert(30%) sepia(17%) saturate(4983%) hue-rotate(332deg) brightness(128%) contrast(94%);
 }
 
