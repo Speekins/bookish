@@ -84,12 +84,13 @@ const App = () => {
     dispatch({ type: "UNFAVORITE", payload: { books: books, myLibrary: myLibrary } })
   }
 
-  const addToFavorites = (isbn) => {
+  const addToFavorites = (isbn, genre) => {
     let books = [...state.books]
     let favorite
     books.map(book => {
       if (book.primary_isbn13 === isbn) {
         book.isFavorite = true
+        book.genre = genre
         favorite = book
         return book
       } else { return book }
@@ -128,7 +129,6 @@ const App = () => {
     dispatch({ type: "CLEAR" })
   }
 
-  console.log(state.myLibrary)
   return (
     <Routes>
       <Route
@@ -154,6 +154,8 @@ const App = () => {
             showModal={state.showModal}
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
           />

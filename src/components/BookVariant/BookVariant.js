@@ -4,7 +4,6 @@ import './BookVariant.css'
 import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
-
 export default function BookVariant({
   book_id,
   title,

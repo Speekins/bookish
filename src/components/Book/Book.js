@@ -32,7 +32,7 @@ const Book = ({
     alt="favorite icon"
     className='heart'
     onClick={() => {
-      addToFavorites(isbn)
+      addToFavorites(isbn, genre)
     }}
   />
 

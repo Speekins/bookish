@@ -32,13 +32,13 @@
 
 .book-variant-heart {
   height: 30px;
-  fill: white;
   transition-duration: 200ms;
-  margin-right: 15px
+  margin-right: 15px;
+  filter: invert(30%) sepia(17%) saturate(4983%) hue-rotate(332deg) brightness(128%) contrast(94%);
 }
 
 .book-variant-heart:hover {
-  transform: scale(1.4);
+  transform: scale(1.2);
   cursor: pointer;
 }
 
