@@ -35,6 +35,7 @@
   transition-duration: 200ms;
   margin-right: 15px;
   filter: invert(30%) sepia(17%) saturate(4983%) hue-rotate(332deg) brightness(128%) contrast(94%);
+  filter: invert(56%) sepia(39%) saturate(4295%) hue-rotate(325deg) brightness(108%) contrast(88%);
 }
 
 .book-variant-heart:hover {

@@ -38,7 +38,7 @@ export default function BookVariant({
 
     return (
       <div className='book-variant'>
-        <img alt={`Cover of ${title}`} src={`${cover}`} className="book-variant-cover" onClick={() => handleModalState(book_id)} />
+        <img alt={`Cover of ${title}`} src={`${cover}`} className="book-variant-cover" onClick={() => handleModalState(isbn)} />
         <div className='book-variant-title'>
           {isFavorite === true ? favorite : unFavorite}
           <p className='name'>{title}</p>

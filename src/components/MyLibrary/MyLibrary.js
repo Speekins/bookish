@@ -7,7 +7,7 @@ import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 import Loading from '../assets/images/bookish_loading.png'
 
-const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoading, clearSearch, addToFavorites, removeFromFavorites }) => {
+const MyLibrary = ({ myLibrary, modalDetails, handleModalState, isLoading, clearSearch, addToFavorites, removeFromFavorites }) => {
 
   if (myLibrary) {
     let booksToDisplay = myLibrary.map((book, idx) =>
@@ -36,7 +36,7 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
             <img src={Loading} alt="Loading" className='loading-image' />
           </div>
         }
-        {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
+        {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} />}
         <NavBar clearSearch={clearSearch} view='my-library' />
         <h1 className='my-library-header'>My Library</h1>
         {!myLibrary.length && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}

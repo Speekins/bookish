@@ -9,7 +9,7 @@ import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
 
 const initialState = {
   isLoading: true,
-  showModal: false,
+  showModal: null,
   books: {},
   bookDetails: null,
   awardedBooks: [],
@@ -28,13 +28,7 @@ const reducer = (state, action) => {
     case "UNFAVORITE":
       return { ...state, books: action.payload.books, myLibrary: action.payload.myLibrary }
     case "MODAL":
-      let modalState = state.showModal ? false : true
-      return { ...state, showModal: modalState }
-    // if (modalState) {
-    //   return { ...state, showModal: modalState, bookDetails: action.payload, isLoading: false }
-    // } else {
-    //   return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
-    // }
+      return { ...state, showModal: action.payload }
     case "SEARCH":
       return { ...state, isLoading: false, error: false, awardedBooks: action.payload }
     case "LOADING":
@@ -98,18 +92,14 @@ const App = () => {
     dispatch({ type: "FAVORITE", payload: { books: books, favorite: favorite } })
   }
 
-  const handleModalState = (id) => {
+  const handleModalState = (isbn = null) => {
 
-    dispatch({ type: "LOADING", payload: true })
-    getBookById("https://hapi-books.p.rapidapi.com/book", id)
-      .then((book) => {
-        if (book.status) {
-          dispatch({ type: "ERROR" })
-          dispatch({ type: "MODAL" })
-        } else {
-          dispatch({ type: "MODAL", payload: book })
-        }
-      })
+    if (isbn) {
+      let modal = state.myLibrary.find(book => book.primary_isbn13 === isbn)
+      dispatch({ type: "MODAL", payload: modal })
+    } else {
+      dispatch({ type: "MODAL", payload: isbn })
+    }
   }
 
   const searchByYear = (year) => {
@@ -151,7 +141,7 @@ const App = () => {
         element={
           <MyLibrary
             myLibrary={state.myLibrary}
-            showModal={state.showModal}
+            modalDetails={state.showModal}
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             addToFavorites={addToFavorites}

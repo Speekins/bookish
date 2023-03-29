@@ -52,15 +52,15 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
   )
 }
 
-Search.propTypes = {
-  awardedBooks: PropTypes.arrayOf(PropTypes.elementType),
-  searchByYear: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-  handleModalState: PropTypes.func.isRequired,
-  bookDetails: PropTypes.object,
-  isLoading: PropTypes.bool.isRequired,
-  clearSearch: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired
-}
+// Search.propTypes = {
+//   awardedBooks: PropTypes.arrayOf(PropTypes.elementType),
+//   searchByYear: PropTypes.func.isRequired,
+//   showModal: PropTypes.bool.isRequired,
+//   handleModalState: PropTypes.func.isRequired,
+//   bookDetails: PropTypes.object,
+//   isLoading: PropTypes.bool.isRequired,
+//   clearSearch: PropTypes.func.isRequired,
+//   error: PropTypes.bool.isRequired
+// }
 
 export default Search
