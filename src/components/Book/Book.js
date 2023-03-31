@@ -4,7 +4,20 @@ import './Book.css'
 import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
-const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeFromFavorites, handleModalState }) => {
+const Book = ({
+  book_id,
+  title,
+  author,
+  cover,
+  url,
+  genre,
+  liked,
+  addToFavorites,
+  removeFromFavorites,
+  handleModalState,
+  rank,
+  weeks_on_list,
+  description }) => {
 
   const [isFavorite, setIsFavorite] = useState(liked)
 
@@ -13,7 +26,7 @@ const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeF
   }
 
   const likeBook = <Book
-    name={name}
+    title={title}
     cover={cover}
     url={url}
     key={book_id}
@@ -26,7 +39,7 @@ const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeF
   />
 
   const unlikeBook = <Book
-    name={name}
+    title={title}
     cover={cover}
     url={url}
     key={book_id}
@@ -57,10 +70,22 @@ const Book = ({ book_id, name, cover, url, genre, liked, addToFavorites, removeF
 
   return (
     <div className='book'>
-      <img alt={`Cover of ${name}`} src={`${cover}`} className="book-cover" onClick={() => handleModalState(book_id)} />
-      <div className='title'>
-        {isFavorite === true ? favorite : unFavorite}
-        <p className='name'>{name}</p>
+      <img alt={`Cover of ${title}`} src={`${cover}`} className="book-cover" onClick={() => handleModalState(book_id)} />
+      <div className='book-info'>
+        <div className='book-info-header'>
+          <div className='title-author'>
+            <p>{genre}</p>
+            <h1 className='title'>{title}</h1>
+            <p className='author'>{author}</p>
+          </div>
+          {isFavorite === true ? favorite : unFavorite}
+        </div>
+        <div className='book-info-details'>
+          <p className='description'>{description}</p>
+          <p className='rank'>This week's rank: #{rank}</p>
+          <p className='weeks-on-list'>Weeks on this list: {weeks_on_list}</p>
+          <a href={url} className='url'>More Info & Purchase Options</a>
+        </div>
       </div>
     </div>
   )
