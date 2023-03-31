@@ -22,8 +22,8 @@ const getBookById = (url, id) => {
     })
 }
 
-const getAwardedBooks = (year) => {
-  return fetch(`https://hapi-books.p.rapidapi.com/top/${year}`)
+const getBooksByDate = (date) => {
+  return fetch(`https://api.nytimes.com/svc/books/v3/lists/overview/${date}.json?api-key=${key}`)
     .then(response => {
       if (response.ok) {
         return response.json()
@@ -32,7 +32,7 @@ const getAwardedBooks = (year) => {
     })
 }
 
-export { getBooks, getBookById, getAwardedBooks }
+export { getBooks, getBookById, getBooksByDate }
 
 let genreNames = [
   "humor",

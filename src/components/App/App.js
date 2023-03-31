@@ -5,7 +5,7 @@ import MyLibrary from '../MyLibrary/MyLibrary'
 import Book from '../Book/Book'
 import Search from '../Search/Search'
 import BadPath from '../Bad_Path/Bad_Path'
-import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
+import { getBooks, getBookById, getBooksByDate } from '../../apiCalls'
 
 const initialState = {
   isLoading: true,
@@ -102,15 +102,16 @@ const App = () => {
     }
   }
 
-  const searchByYear = (year) => {
+  const searchByYear = (date) => {
     dispatch({ type: "LOADING", payload: true })
-    getAwardedBooks(year)
+    getBooksByDate(date)
       .then((data) => {
         if (data.status) {
           dispatch({ type: "ERROR" })
         } else {
-          let awardedBooks = data.results.books
-          dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
+          let books = data.results.books
+          console.log(books)
+          dispatch({ type: "SEARCH", payload: books })
         }
       })
   }
