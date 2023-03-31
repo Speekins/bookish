@@ -12,6 +12,7 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
 
   const warning = <p className='no-books-warning'>Something went wrong here...</p>
 
+  console.log(date)
   return (
     <div>
       <img src={banner} alt="search banner" className='search-banner' />
@@ -22,7 +23,7 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
         </div>
       }
       <div className='search-bar'>
-        <input type="date" value='date' onChange={(event) => setDate(event.target.value)}></input>
+        <input type="date" value={date} onChange={(event) => setDate(event.target.value)}></input>
         <button className='search-submit' onClick={() => searchByYear(date)}>Submit</button>
       </div>
       {!!awardedBooks.length && <h1 className='year'>{date}</h1>}

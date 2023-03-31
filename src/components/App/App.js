@@ -106,10 +106,11 @@ const App = () => {
     dispatch({ type: "LOADING", payload: true })
     getBooksByDate(date)
       .then((data) => {
+        console.log(data)
         if (data.status) {
           dispatch({ type: "ERROR" })
         } else {
-          let books = data.results.books
+          let books = data.results.lists[0].books
           console.log(books)
           dispatch({ type: "SEARCH", payload: books })
         }
