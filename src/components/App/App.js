@@ -9,7 +9,7 @@ import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
 
 const initialState = {
   isLoading: true,
-  showModal: false,
+  showModal: null,
   books: {},
   bookDetails: null,
   awardedBooks: [],
@@ -26,23 +26,9 @@ const reducer = (state, action) => {
     case "FAVORITE":
       return { ...state, books: action.payload.books, myLibrary: [...state.myLibrary, action.payload.favorite] }
     case "UNFAVORITE":
-      let library = state.myLibrary.filter(book => book.props.book_id !== action.payload.id)
-      if (!action.payload.genre) {
-        return { ...state, isLoading: false, myLibrary: [...library] }
-      } else {
-        let genreType = [...state.books[action.payload.genre]]
-        let idx = genreType.findIndex(book => book.props.book_id === action.payload.id)
-        genreType[idx] = action.payload.newBook
-        return { ...state, isLoading: false, books: { ...state.books, [action.payload.genre]: genreType }, myLibrary: [...library] }
-      }
-
+      return { ...state, books: action.payload.books, myLibrary: action.payload.myLibrary }
     case "MODAL":
-      let modalState = state.showModal ? false : true
-      if (modalState) {
-        return { ...state, showModal: modalState, bookDetails: action.payload, isLoading: false }
-      } else {
-        return { ...state, showModal: modalState, bookDetails: null, isLoading: false }
-      }
+      return { ...state, showModal: action.payload }
     case "SEARCH":
       return { ...state, isLoading: false, error: false, awardedBooks: action.payload }
     case "LOADING":
@@ -68,24 +54,12 @@ const App = () => {
       })
   }
 
-  const checkForFavorite = (searchedBooks) => {
-    let libraryBooks = state.myLibrary.map(book => book.props.book_id)
-    return searchedBooks.map(book => {
-      if (libraryBooks.includes(Number(book.props.book_id))) {
-        let likedBook = <Book
-          name={book.props.name}
-          cover={book.props.cover}
-          url={book.props.url}
-          key={book.props.book_id}
-          book_id={book.props.book_id}
-          genre={book.props.genre}
-          description={book.description}
-          liked={true}
-          addToFavorites={addToFavorites}
-          removeFromFavorites={removeFromFavorites}
-          handleModalState={handleModalState}
-        />
-        return likedBook
+  const checkForFavorite = (books) => {
+    let myLibraryISBN = state.myLibrary.map(book => book.primary_isbn13)
+    return books.map(book => {
+      if (myLibraryISBN.includes(book.primary_isbn13)) {
+        book.isFavorite = true
+        return book
       } else {
         return book
       }
@@ -93,16 +67,24 @@ const App = () => {
   }
 
   const removeFromFavorites = (isbn) => {
-
-    dispatch({ type: "UNFAVORITE", payload: "nothing" })
+    let books = [...state.books]
+    let myLibrary = state.myLibrary.filter(book => book.primary_isbn13 !== isbn)
+    books.map(book => {
+      if (book.primary_isbn13 === isbn) {
+        book.isFavorite = false
+        return book
+      } else { return book }
+    })
+    dispatch({ type: "UNFAVORITE", payload: { books: books, myLibrary: myLibrary } })
   }
 
-  const addToFavorites = (isbn) => {
+  const addToFavorites = (isbn, genre) => {
     let books = [...state.books]
     let favorite
     books.map(book => {
       if (book.primary_isbn13 === isbn) {
         book.isFavorite = true
+        book.genre = genre
         favorite = book
         return book
       } else { return book }
@@ -110,18 +92,14 @@ const App = () => {
     dispatch({ type: "FAVORITE", payload: { books: books, favorite: favorite } })
   }
 
-  const handleModalState = (id) => {
+  const handleModalState = (isbn = null) => {
 
-    dispatch({ type: "LOADING", payload: true })
-    getBookById("https://hapi-books.p.rapidapi.com/book", id)
-      .then((book) => {
-        if (book.status) {
-          dispatch({ type: "ERROR" })
-          dispatch({ type: "MODAL" })
-        } else {
-          dispatch({ type: "MODAL", payload: book })
-        }
-      })
+    if (isbn) {
+      let modal = state.myLibrary.find(book => book.primary_isbn13 === isbn)
+      dispatch({ type: "MODAL", payload: modal })
+    } else {
+      dispatch({ type: "MODAL", payload: isbn })
+    }
   }
 
   const searchByYear = (year) => {
@@ -141,7 +119,6 @@ const App = () => {
     dispatch({ type: "CLEAR" })
   }
 
-  console.log(state.myLibrary)
   return (
     <Routes>
       <Route
@@ -164,9 +141,11 @@ const App = () => {
         element={
           <MyLibrary
             myLibrary={state.myLibrary}
-            showModal={state.showModal}
+            modalDetails={state.showModal}
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
           />

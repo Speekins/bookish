@@ -32,7 +32,7 @@ const Book = ({
     alt="favorite icon"
     className='heart'
     onClick={() => {
-      addToFavorites(isbn)
+      addToFavorites(isbn, genre)
     }}
   />
 
@@ -50,11 +50,15 @@ const Book = ({
         </div>
         <div className='book-info-details'>
           <p className='description'>{description}</p>
-          <div className='rank-info'>
-            <p style={{ textDecoration: 'underline' }}>Rank</p>
-            <p className='rank'>#{rank}</p>
-            <p style={{ textDecoration: 'underline' }}>Consecutive Weeks</p>
-            <p className='weeks-on-list'>{weeks_on_list}</p>
+          <div className='rank-weeks-on-list-container'>
+            <div className='rank-container'>
+              <p style={{ textDecoration: 'underline', margin: '5px' }}>Rank</p>
+              <p className='rank'>#{rank}</p>
+            </div>
+            <div className='weeks-on-list-container'>
+              <p style={{ textDecoration: 'underline', margin: '5px' }}>Consecutive Weeks</p>
+              <p className='weeks-on-list'>{weeks_on_list}</p>
+            </div>
           </div>
           <a href={url} className='url' target="_blank" rel="noopener noreferrer">More Info & Purchase Options</a>
         </div>

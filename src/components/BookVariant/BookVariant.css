@@ -1,0 +1,50 @@
+.book-variant {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.book-variant-cover {
+  width: 250px;
+  height: auto;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.book-variant-cover:hover {
+  border-top: 5px solid rgb(238, 200, 62);
+  border-bottom: 5px solid rgb(238, 200, 62);
+  cursor: pointer;
+}
+
+.book-variant-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 14px;
+}
+
+.book-variant-heart {
+  height: 30px;
+  transition-duration: 200ms;
+  margin-right: 15px;
+  filter: invert(30%) sepia(17%) saturate(4983%) hue-rotate(332deg) brightness(128%) contrast(94%);
+  filter: invert(56%) sepia(39%) saturate(4295%) hue-rotate(325deg) brightness(108%) contrast(88%);
+}
+
+.book-variant-heart:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .book-variant-cover {
+    width: 200px
+  }
+}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './Search.css'
 import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
-import banner from '../assets/images/search_banner.jpg'
+import banner from '../assets/images/books2.jpg'
 import Loading from '../assets/images/bookish_loading.png'
 
 const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookDetails, isLoading, clearSearch, error }) => {
@@ -52,15 +52,15 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
   )
 }
 
-Search.propTypes = {
-  awardedBooks: PropTypes.arrayOf(PropTypes.elementType),
-  searchByYear: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-  handleModalState: PropTypes.func.isRequired,
-  bookDetails: PropTypes.object,
-  isLoading: PropTypes.bool.isRequired,
-  clearSearch: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired
-}
+// Search.propTypes = {
+//   awardedBooks: PropTypes.arrayOf(PropTypes.elementType),
+//   searchByYear: PropTypes.func.isRequired,
+//   showModal: PropTypes.bool.isRequired,
+//   handleModalState: PropTypes.func.isRequired,
+//   bookDetails: PropTypes.object,
+//   isLoading: PropTypes.bool.isRequired,
+//   clearSearch: PropTypes.func.isRequired,
+//   error: PropTypes.bool.isRequired
+// }
 
 export default Search
