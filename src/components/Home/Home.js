@@ -34,11 +34,12 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
         url={book.amazon_product_url}
         author={book.contributor}
         key={idx}
+        isbn={book.primary_isbn13}
         rank={book.rank}
-        genre={genreSelection}
+        genre={displayGenre}
         weeks_on_list={book.weeks_on_list}
         description={book.description}
-        liked={false}
+        isFavorite={book.isFavorite}
         addToFavorites={addToFavorites}
         removeFromFavorites={removeFromFavorites}
         handleModalState={handleModalState}
@@ -56,6 +57,8 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
         <option value='food-and-fitness'>Food & Fitness</option>
         <option value='celebrities'>Celebrities</option>
         <option value='culture'>Culture</option>
+        <option value='advice-how-to-and-miscellaneous'>Adivce & How-To</option>
+        <option value='picture-books'>Picture Books</option>
       </select>
 
     return (

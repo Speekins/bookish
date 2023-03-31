@@ -34,6 +34,21 @@ const getAwardedBooks = (year) => {
 
 export { getBooks, getBookById, getAwardedBooks }
 
+let genreNames = [
+  "humor",
+  "science",
+  "health",
+  "food-and-fitness",
+  "education",
+  "business-books",
+  "culture",
+  "celebrities",
+  "advice-how-to-and-miscellaneous",
+  "hardcover-nonfiction",
+  "hardcover-fiction",
+  "picture-books"
+]
+
 /*
 EXAMPLE BOOK SET
 "books": [

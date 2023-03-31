@@ -10,8 +10,9 @@ const Book = ({
   author,
   cover,
   url,
+  isbn,
   genre,
-  liked,
+  isFavorite,
   addToFavorites,
   removeFromFavorites,
   handleModalState,
@@ -19,43 +20,11 @@ const Book = ({
   weeks_on_list,
   description }) => {
 
-  const [isFavorite, setIsFavorite] = useState(liked)
-
-  const handleChange = () => {
-    isFavorite === true ? setIsFavorite(false) : setIsFavorite(true)
-  }
-
-  const likeBook = <Book
-    title={title}
-    cover={cover}
-    url={url}
-    key={book_id}
-    book_id={book_id}
-    addToFavorites={addToFavorites}
-    removeFromFavorites={removeFromFavorites}
-    handleModalState={handleModalState}
-    genre={genre}
-    liked={true}
-  />
-
-  const unlikeBook = <Book
-    title={title}
-    cover={cover}
-    url={url}
-    key={book_id}
-    book_id={book_id}
-    addToFavorites={addToFavorites}
-    removeFromFavorites={removeFromFavorites}
-    genre={genre}
-    liked={false}
-  />
-
   const favorite = <img src={fillHeart}
     alt="favorite icon"
     className='heart'
     onClick={() => {
-      handleChange()
-      removeFromFavorites(book_id, genre, unlikeBook)
+      removeFromFavorites(isbn)
     }}
   />
 
@@ -63,8 +32,7 @@ const Book = ({
     alt="favorite icon"
     className='heart'
     onClick={() => {
-      handleChange()
-      addToFavorites(book_id, genre, likeBook)
+      addToFavorites(isbn)
     }}
   />
 
@@ -78,13 +46,17 @@ const Book = ({
             <h1 className='title'>{title}</h1>
             <p className='author'>{author}</p>
           </div>
-          {isFavorite === true ? favorite : unFavorite}
+          {isFavorite ? favorite : unFavorite}
         </div>
         <div className='book-info-details'>
           <p className='description'>{description}</p>
-          <p className='rank'>This week's rank: #{rank}</p>
-          <p className='weeks-on-list'>Weeks on this list: {weeks_on_list}</p>
-          <a href={url} className='url'>More Info & Purchase Options</a>
+          <div className='rank-info'>
+            <p style={{ textDecoration: 'underline' }}>Rank</p>
+            <p className='rank'>#{rank}</p>
+            <p style={{ textDecoration: 'underline' }}>Consecutive Weeks</p>
+            <p className='weeks-on-list'>{weeks_on_list}</p>
+          </div>
+          <a href={url} className='url' target="_blank" rel="noopener noreferrer">More Info & Purchase Options</a>
         </div>
       </div>
     </div>

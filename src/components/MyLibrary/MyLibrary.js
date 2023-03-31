@@ -26,13 +26,13 @@ const MyLibrary = ({ myLibrary, showModal, handleModalState, bookDetails, isLoad
   )
 }
 
-MyLibrary.propTypes = {
-  myLibrary: PropTypes.arrayOf(PropTypes.elementType).isRequired,
-  handleModalState: PropTypes.func.isRequired,
-  clearSearch: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  bookDetails: PropTypes.object,
-}
+// MyLibrary.propTypes = {
+//   myLibrary: PropTypes.arrayOf(PropTypes.elementType).isRequired,
+//   handleModalState: PropTypes.func.isRequired,
+//   clearSearch: PropTypes.func.isRequired,
+//   showModal: PropTypes.bool.isRequired,
+//   isLoading: PropTypes.bool.isRequired,
+//   bookDetails: PropTypes.object,
+// }
 
 export default MyLibrary
