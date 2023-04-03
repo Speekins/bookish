@@ -106,14 +106,13 @@ const App = () => {
     dispatch({ type: "LOADING", payload: true })
     getBooksByDate(date)
       .then((data) => {
-        console.log(data)
-        if (data.status) {
-          dispatch({ type: "ERROR" })
-        } else {
-          let books = data.results.lists[0].books
-          console.log(books)
-          dispatch({ type: "SEARCH", payload: books })
-        }
+        // if (data.status) {
+        //   dispatch({ type: "ERROR" })
+        // } else {
+        console.log(data.results.lists)
+        let books = data.results.lists
+        dispatch({ type: "SEARCH", payload: books })
+        // }
       })
   }
 
@@ -163,6 +162,8 @@ const App = () => {
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             handleModalState={handleModalState}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
             clearSearch={clearSearch}
             error={state.error}
           />

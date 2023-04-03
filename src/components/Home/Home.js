@@ -58,6 +58,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
         <option value='culture'>Culture</option>
         <option value='advice-how-to-and-miscellaneous'>Adivce & How-To</option>
         <option value='picture-books'>Picture Books</option>
+        <option value='sports'>Sports</option>
       </select>
 
     return (

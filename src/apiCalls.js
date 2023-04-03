@@ -23,7 +23,8 @@ const getBookById = (url, id) => {
 }
 
 const getBooksByDate = (date) => {
-  return fetch(`https://api.nytimes.com/svc/books/v3/lists/overview/${date}.json?api-key=${key}`)
+  date = String(date)
+  return fetch(`https://api.nytimes.com/svc/books/v3/lists/overview.json?published_date=${date}&api-key=${key}`)
     .then(response => {
       if (response.ok) {
         return response.json()
