@@ -2,10 +2,9 @@ import React, { useEffect, useReducer } from 'react'
 import { Route, Routes } from 'react-router'
 import Home from '../Home/Home'
 import MyLibrary from '../MyLibrary/MyLibrary'
-import Book from '../Book/Book'
 import Search from '../Search/Search'
 import BadPath from '../Bad_Path/Bad_Path'
-import { getBooks, getBookById, getAwardedBooks } from '../../apiCalls'
+import { getBooks, getBookById, getBooksByDate } from '../../apiCalls'
 
 const initialState = {
   isLoading: true,
@@ -24,6 +23,9 @@ const reducer = (state, action) => {
     case "SUCCESS":
       return { ...state, isLoading: false, books: action.payload.books }
     case "FAVORITE":
+      if (action.payload.genreSelection) {
+        return { ...state, myLibrary: [...state.MyLibrary, action.payload.favorite] }
+      }
       return { ...state, books: action.payload.books, myLibrary: [...state.myLibrary, action.payload.favorite] }
     case "UNFAVORITE":
       return { ...state, books: action.payload.books, myLibrary: action.payload.myLibrary }
@@ -78,18 +80,40 @@ const App = () => {
     dispatch({ type: "UNFAVORITE", payload: { books: books, myLibrary: myLibrary } })
   }
 
-  const addToFavorites = (isbn, genre) => {
-    let books = [...state.books]
+  const addToFavorites = (isbn, genre, genreSelection = null) => {
+    let books
     let favorite
-    books.map(book => {
-      if (book.primary_isbn13 === isbn) {
-        book.isFavorite = true
-        book.genre = genre
-        favorite = book
-        return book
-      } else { return book }
-    })
-    dispatch({ type: "FAVORITE", payload: { books: books, favorite: favorite } })
+    if (genreSelection) {
+      books = [...state.awardedBooks].map(bookSet => {
+        if (bookSet.list_name_encoded === genreSelection) {
+          return bookSet.books.map(book => {
+            if (book.primary_isbn13 === isbn) {
+              book.isFavorite = true
+              book.genre = genre
+              favorite = book
+              console.log(bookSet)
+              return book
+            } else {
+              return book
+            }
+          })
+        } else {
+          return bookSet
+        }
+      })
+      dispatch({ type: "FAVORITE", payload: { awardedBooks: books, favorite: favorite } })
+    } else {
+      books = [...state.books]
+      books.map(book => {
+        if (book.primary_isbn13 === isbn) {
+          book.isFavorite = true
+          book.genre = genre
+          favorite = book
+          return book
+        } else { return book }
+      })
+      dispatch({ type: "FAVORITE", payload: { books: books, favorite: favorite } })
+    }
   }
 
   const handleModalState = (isbn = null) => {
@@ -102,16 +126,16 @@ const App = () => {
     }
   }
 
-  const searchByYear = (year) => {
+  const searchByYear = (date) => {
     dispatch({ type: "LOADING", payload: true })
-    getAwardedBooks(year)
+    getBooksByDate(date)
       .then((data) => {
-        if (data.status) {
-          dispatch({ type: "ERROR" })
-        } else {
-          let awardedBooks = data.results.books
-          dispatch({ type: "SEARCH", payload: checkForFavorite(awardedBooks) })
-        }
+        // if (data.status) {
+        //   dispatch({ type: "ERROR" })
+        // } else {
+        let books = data.results.lists
+        dispatch({ type: "SEARCH", payload: books })
+        // }
       })
   }
 
@@ -161,6 +185,8 @@ const App = () => {
             bookDetails={state.bookDetails}
             isLoading={state.isLoading}
             handleModalState={handleModalState}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
             clearSearch={clearSearch}
             error={state.error}
           />

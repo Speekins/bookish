@@ -12,6 +12,7 @@ export default function BookVariant({
   url,
   isbn,
   genre,
+  genreSelection,
   isFavorite,
   addToFavorites,
   removeFromFavorites,
@@ -32,7 +33,7 @@ export default function BookVariant({
       alt="favorite icon"
       className='book-variant-heart'
       onClick={() => {
-        addToFavorites(isbn)
+        addToFavorites(isbn, genre, genreSelection)
       }}
     />
 
