@@ -7,58 +7,52 @@ import BookVariant from '../BookVariant/BookVariant'
 import banner from '../assets/images/books2.jpg'
 import Loading from '../assets/images/bookish_loading.png'
 
-const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookDetails, isLoading, clearSearch, error, addToFavorites, removeFromFavorites }) => {
+const Search = ({
+  awardedBooks,
+  searchByYear,
+  showModal,
+  handleModalState,
+  bookDetails,
+  isLoading,
+  clearSearch,
+  error,
+  addToFavorites,
+  removeFromFavorites }) => {
 
   const [date, setDate] = useState('')
+  const [options, setOptions] = useState('')
+  const [genreWarning, setGenreWarning] = useState(false)
   const [genreSelection, setGenreSelection] = useState('hardcover-fiction')
-  const [books, setBooks] = useState([])
-  const [booksToDisplay, setBooksToDisplay] = useState([])
+  const [booksToDisplay, setBooksToDisplay] = useState(null)
 
   useEffect(() => {
-    if (awardedBooks) {
+    if (awardedBooks.length) {
       let books = awardedBooks.find(book => book.list_name_encoded === genreSelection)
-      setBooks(books)
+      if (!books) { return setGenreWarning(true) }
+      let booksToDisplay = books.books.map((book, idx) =>
+        <BookVariant
+          title={book.title}
+          cover={book.book_image}
+          url={book.amazon_product_url}
+          author={book.contributor}
+          key={idx}
+          isbn={book.primary_isbn13}
+          rank={book.rank}
+          genre={book.genre}
+          weeks_on_list={book.weeks_on_list}
+          description={book.description}
+          isFavorite={book.isFavorite}
+          addToFavorites={addToFavorites}
+          removeFromFavorites={removeFromFavorites}
+          handleModalState={handleModalState}
+        />)
+      let options = awardedBooks.map((genre, idx) => <option key={idx} value={genre.list_name_encoded}>{genre.list_name}</option>)
+      setOptions(options)
+      setBooksToDisplay(booksToDisplay)
     }
-  }, [genreSelection, awardedBooks])
+  }, [awardedBooks, genreSelection, addToFavorites, handleModalState, removeFromFavorites])
 
   const warning = <p className='no-books-warning'>Something went wrong here...</p>
-
-  const selection =
-    <select onChange={(event) => setGenreSelection(event.target.value)}>
-      <option value='hardcover-fiction'>Fiction</option>
-      <option value='hardcover-nonfiction'>NonFiction</option>
-      <option value='business-books'>Business</option>
-      <option value='education'>Education</option>
-      <option value='humor'>Humor</option>
-      <option value='science'>Science</option>
-      <option value='health'>Health</option>
-      <option value='food-and-fitness'>Food & Fitness</option>
-      <option value='celebrities'>Celebrities</option>
-      <option value='culture'>Culture</option>
-      <option value='advice-how-to-and-miscellaneous'>Adivce & How-To</option>
-      <option value='picture-books'>Picture Books</option>
-    </select>
-
-  if (books.length) {
-    let booksToDisplay = books.map((book, idx) =>
-      <BookVariant
-        title={book.title}
-        cover={book.book_image}
-        url={book.amazon_product_url}
-        author={book.contributor}
-        key={idx}
-        isbn={book.primary_isbn13}
-        rank={book.rank}
-        genre={book.genre}
-        weeks_on_list={book.weeks_on_list}
-        description={book.description}
-        isFavorite={book.isFavorite}
-        addToFavorites={addToFavorites}
-        removeFromFavorites={removeFromFavorites}
-        handleModalState={handleModalState}
-      />)
-    setBooksToDisplay(booksToDisplay)
-  }
 
   return (
     <div>
@@ -69,14 +63,26 @@ const Search = ({ awardedBooks, searchByYear, showModal, handleModalState, bookD
           <img src={Loading} alt="Loading" className='loading-image' />
         </div>
       }
+      {!!genreWarning &&
+        <div>
+          <h1 className='genre-warning'>Sorry, that genre did not exist in {`${date.slice(0, 4)}`}</h1>
+          <button onClick={() => {
+            setGenreSelection('hardcover-fiction')
+            setGenreWarning(false)
+          }}>OK</button>
+        </div>
+      }
       <div className='search-bar'>
         <input type="date" value={date} onChange={(event) => setDate(event.target.value)}></input>
         <button className='search-submit' onClick={() => searchByYear(date)}>Submit</button>
       </div>
-      {!!books.length && <h1 className='year'>{date}</h1>}
+      <select value={genreSelection} onChange={(event) => setGenreSelection(event.target.value)}>
+        {options}
+      </select>
+      {null && <h1 className='year'>{date}</h1>}
       <div className='search-container'>
         {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
-        {!!books.length && booksToDisplay}
+        {!!booksToDisplay && booksToDisplay}
         {error && warning}
       </div>
     </div>

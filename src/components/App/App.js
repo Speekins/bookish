@@ -109,7 +109,6 @@ const App = () => {
         // if (data.status) {
         //   dispatch({ type: "ERROR" })
         // } else {
-        console.log(data.results.lists)
         let books = data.results.lists
         dispatch({ type: "SEARCH", payload: books })
         // }
