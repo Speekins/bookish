@@ -5,7 +5,6 @@ import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
 const Book = ({
-  book_id,
   title,
   author,
   cover,
@@ -15,7 +14,6 @@ const Book = ({
   isFavorite,
   addToFavorites,
   removeFromFavorites,
-  handleModalState,
   rank,
   weeks_on_list,
   description }) => {
@@ -38,7 +36,7 @@ const Book = ({
 
   return (
     <div className='book'>
-      <img alt={`Cover of ${title}`} src={`${cover}`} className="book-cover" onClick={() => handleModalState(book_id)} />
+      <img alt={`Cover of ${title}`} src={`${cover}`} className="book-cover"/>
       <div className='book-info'>
         <div className='book-info-header'>
           <div className='title-author'>

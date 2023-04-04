@@ -21,14 +21,12 @@ const Search = ({
 
   const [date, setDate] = useState('')
   const [options, setOptions] = useState('')
-  const [genreWarning, setGenreWarning] = useState(false)
   const [genreSelection, setGenreSelection] = useState('hardcover-fiction')
   const [booksToDisplay, setBooksToDisplay] = useState(null)
 
   useEffect(() => {
     if (awardedBooks.length) {
       let books = awardedBooks.find(book => book.list_name_encoded === genreSelection)
-      if (!books) { return setGenreWarning(true) }
       let booksToDisplay = books.books.map((book, idx) =>
         <BookVariant
           title={book.title}
@@ -39,6 +37,7 @@ const Search = ({
           isbn={book.primary_isbn13}
           rank={book.rank}
           genre={book.genre}
+          genreSelection={genreSelection}
           weeks_on_list={book.weeks_on_list}
           description={book.description}
           isFavorite={book.isFavorite}
@@ -61,15 +60,6 @@ const Search = ({
       {!!isLoading &&
         <div className='loading-container'>
           <img src={Loading} alt="Loading" className='loading-image' />
-        </div>
-      }
-      {!!genreWarning &&
-        <div>
-          <h1 className='genre-warning'>Sorry, that genre did not exist in {`${date.slice(0, 4)}`}</h1>
-          <button onClick={() => {
-            setGenreSelection('hardcover-fiction')
-            setGenreWarning(false)
-          }}>OK</button>
         </div>
       }
       <div className='search-bar'>
