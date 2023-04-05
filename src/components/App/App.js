@@ -23,11 +23,14 @@ const reducer = (state, action) => {
     case "SUCCESS":
       return { ...state, isLoading: false, books: action.payload.books }
     case "FAVORITE":
-      if (action.payload.genreSelection) {
-        return { ...state, myLibrary: [...state.MyLibrary, action.payload.favorite] }
+      if (Object.keys(action.payload)[0] === 'awardedBooks') {
+        return { ...state, awardedBooks: action.payload.awardedBooks, myLibrary: [...state.myLibrary, action.payload.favorite] }
       }
       return { ...state, books: action.payload.books, myLibrary: [...state.myLibrary, action.payload.favorite] }
     case "UNFAVORITE":
+      if (Object.keys(action.payload)[0] === 'awardedBooks') {
+        return { ...state, awardedBooks: action.payload.awardedBooks, myLibrary: action.payload.myLibrary }
+      }
       return { ...state, books: action.payload.books, myLibrary: action.payload.myLibrary }
     case "MODAL":
       return { ...state, showModal: action.payload }
@@ -68,30 +71,15 @@ const App = () => {
     })
   }
 
-  const removeFromFavorites = (isbn) => {
-    let books = [...state.books]
-    let myLibrary = state.myLibrary.filter(book => book.primary_isbn13 !== isbn)
-    books.map(book => {
-      if (book.primary_isbn13 === isbn) {
-        book.isFavorite = false
-        return book
-      } else { return book }
-    })
-    dispatch({ type: "UNFAVORITE", payload: { books: books, myLibrary: myLibrary } })
-  }
-
-  const addToFavorites = (isbn, genre, genreSelection = null) => {
+  const removeFromFavorites = (isbn, genreSelection = null) => {
     let books
-    let favorite
+    let myLibrary = state.myLibrary.filter(book => book.primary_isbn13 !== isbn)
     if (genreSelection) {
       books = [...state.awardedBooks].map(bookSet => {
         if (bookSet.list_name_encoded === genreSelection) {
           return bookSet.books.map(book => {
             if (book.primary_isbn13 === isbn) {
-              book.isFavorite = true
-              book.genre = genre
-              favorite = book
-              console.log(bookSet)
+              book.isFavorite = false
               return book
             } else {
               return book
@@ -101,6 +89,41 @@ const App = () => {
           return bookSet
         }
       })
+      dispatch({ type: "UNFAVORITE", payload: { awardedBooks: books, myLibrary: myLibrary } })
+    } else {
+      books = [...state.books].map(book => {
+        if (book.primary_isbn13 === isbn) {
+          book.isFavorite = false
+          return book
+        } else { return book }
+      })
+      dispatch({ type: "UNFAVORITE", payload: { books: books, myLibrary: myLibrary } })
+    }
+  }
+
+  const addToFavorites = (isbn, genre, genreSelection = null) => {
+    let books
+    let favorite
+    if (genreSelection) {
+      books = [...state.awardedBooks].map(bookSet => {
+        if (bookSet.list_name_encoded === genreSelection) {
+          let books = bookSet.books.map(book => {
+            if (book.primary_isbn13 === isbn) {
+              book.isFavorite = true
+              book.genre = genre
+              favorite = book
+              return book
+            } else {
+              return book
+            }
+          })
+          bookSet.books = books
+          return bookSet
+        } else {
+          return bookSet
+        }
+      })
+      console.log(books)
       dispatch({ type: "FAVORITE", payload: { awardedBooks: books, favorite: favorite } })
     } else {
       books = [...state.books]
