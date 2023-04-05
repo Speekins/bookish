@@ -5,7 +5,6 @@ import heart from '../assets/images/heart-regular.svg'
 import fillHeart from '../assets/images/heart-solid.svg'
 
 export default function BookVariant({
-  book_id,
   title,
   author,
   cover,
@@ -25,7 +24,7 @@ export default function BookVariant({
       alt="favorite icon"
       className='book-variant-heart'
       onClick={() => {
-        removeFromFavorites(isbn)
+        removeFromFavorites(isbn, genreSelection)
       }}
     />
 
@@ -41,7 +40,7 @@ export default function BookVariant({
       <div className='book-variant'>
         <img alt={`Cover of ${title}`} src={`${cover}`} className="book-variant-cover" onClick={() => handleModalState(isbn)} />
         <div className='book-variant-title'>
-          {isFavorite === true ? favorite : unFavorite}
+          {isFavorite ? favorite : unFavorite}
           <p className='name'>{title}</p>
         </div>
       </div>

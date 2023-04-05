@@ -1,10 +1,10 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { Route, Routes } from 'react-router'
 import Home from '../Home/Home'
 import MyLibrary from '../MyLibrary/MyLibrary'
 import Search from '../Search/Search'
 import BadPath from '../Bad_Path/Bad_Path'
-import { getBooks, getBookById, getBooksByDate } from '../../apiCalls'
+import { getBooks, getBooksByDate } from '../../apiCalls'
 
 const initialState = {
   isLoading: true,
@@ -71,13 +71,13 @@ const App = () => {
     })
   }
 
-  const removeFromFavorites = (isbn, genreSelection = null) => {
+  const removeFromFavorites = (isbn, genreSelection) => {
     let books
     let myLibrary = state.myLibrary.filter(book => book.primary_isbn13 !== isbn)
     if (genreSelection) {
       books = [...state.awardedBooks].map(bookSet => {
         if (bookSet.list_name_encoded === genreSelection) {
-          return bookSet.books.map(book => {
+          let books = bookSet.books.map(book => {
             if (book.primary_isbn13 === isbn) {
               book.isFavorite = false
               return book
@@ -85,6 +85,8 @@ const App = () => {
               return book
             }
           })
+          bookSet.books = books
+          return bookSet
         } else {
           return bookSet
         }
@@ -111,6 +113,7 @@ const App = () => {
             if (book.primary_isbn13 === isbn) {
               book.isFavorite = true
               book.genre = genre
+              book.genreSelection = genreSelection
               favorite = book
               return book
             } else {
@@ -123,7 +126,6 @@ const App = () => {
           return bookSet
         }
       })
-      console.log(books)
       dispatch({ type: "FAVORITE", payload: { awardedBooks: books, favorite: favorite } })
     } else {
       books = [...state.books]
