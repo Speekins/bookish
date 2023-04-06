@@ -36,6 +36,8 @@ const reducer = (state, action) => {
       return { ...state, showModal: action.payload }
     case "SEARCH":
       return { ...state, isLoading: false, error: false, awardedBooks: action.payload }
+    case "NOTES":
+      return { ...state, myLibrary: action.payload}
     case "LOADING":
       let isLoading = action.payload
       return { ...state, isLoading: isLoading }
@@ -160,10 +162,21 @@ const App = () => {
         // } else {
         let books = data.results.lists
         books.forEach(bookSet => bookSet.books = checkForFavorite(bookSet.books))
-        console.log(books)
         dispatch({ type: "SEARCH", payload: books })
         // }
       })
+  }
+
+  const submitNotes = (notes, isbn) => {
+    let books = [...state.myLibrary].map(book => {
+      if (book.primary_isbn13 === isbn) {
+        book.userNotes = notes
+        return book
+      } else {
+        return book
+      }
+    })
+    dispatch({ type: "NOTES", payload: books })
   }
 
   const clearSearch = () => {
@@ -199,6 +212,7 @@ const App = () => {
             removeFromFavorites={removeFromFavorites}
             handleModalState={handleModalState}
             clearSearch={clearSearch}
+            submitNotes={submitNotes}
           />
         }
       />

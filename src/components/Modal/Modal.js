@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import NotesForm from '../NotesForm/NotesForm'
 import './Modal.css'
 
-const Modal = ({ handleModalState, modalDetails }) => {
+const Modal = ({ handleModalState, modalDetails, submitNotes }) => {
 
-  console.log(modalDetails)
   return (
     <div className='modal-container'>
       <div className='modal'>
@@ -19,6 +19,11 @@ const Modal = ({ handleModalState, modalDetails }) => {
             <div className='modal-synopsis'>
               <p>{modalDetails.description}</p>
             </div>
+            <NotesForm
+              userNotes={modalDetails.userNotes}
+              submitNotes={submitNotes}
+              isbn={modalDetails.primary_isbn13}
+            />
           </div>
         </div>
       </div>
