@@ -55,7 +55,7 @@ const App = () => {
   const getIt = async (genre) => {
     await getBooks(genre)
       .then((data) => {
-        dispatch({ type: "SUCCESS", payload: { books: data.results.books, genre: "fiction" } })
+        dispatch({ type: "SUCCESS", payload: { books: checkForFavorite(data.results.books), genre: "fiction" } })
       })
   }
 
@@ -79,7 +79,7 @@ const App = () => {
         if (bookSet.list_name_encoded === genreSelection) {
           let books = bookSet.books.map(book => {
             if (book.primary_isbn13 === isbn) {
-              book.isFavorite = false
+              book.isFavorite ? book.isFavorite = false : book.isFavorite = true
               return book
             } else {
               return book
@@ -159,6 +159,8 @@ const App = () => {
         //   dispatch({ type: "ERROR" })
         // } else {
         let books = data.results.lists
+        books.forEach(bookSet => bookSet.books = checkForFavorite(bookSet.books))
+        console.log(books)
         dispatch({ type: "SEARCH", payload: books })
         // }
       })
