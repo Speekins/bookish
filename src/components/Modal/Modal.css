@@ -75,6 +75,16 @@
   border-bottom: 2px black solid
 }
 
+.star {
+  width: 40px;
+  height: auto;
+  filter: invert(98%) sepia(93%) saturate(6340%) hue-rotate(325deg) brightness(100%) contrast(87%);
+}
+
+.star:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 1000px) {
 
   .modal-cover {

@@ -15,7 +15,7 @@ const MyLibrary = ({
   clearSearch,
   addToFavorites,
   removeFromFavorites, 
-  submitNotes }) => {
+  submitFeedback }) => {
 
   if (myLibrary) {
     let booksToDisplay = myLibrary.map((book, idx) =>
@@ -45,7 +45,7 @@ const MyLibrary = ({
             <img src={Loading} alt="Loading" className='loading-image' />
           </div>
         }
-        {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} submitNotes={submitNotes}/>}
+        {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} submitFeedback={submitFeedback}/>}
         <NavBar clearSearch={clearSearch} view='my-library' />
         <h1 className='my-library-header'>My Library</h1>
         {!myLibrary.length && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}
