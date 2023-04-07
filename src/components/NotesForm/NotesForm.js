@@ -11,6 +11,7 @@ function NotesForm({ userNotes, submitFeedback, isbn }) {
   }, [userNotes])
 
   const textForm = <textarea
+  placeholder='Type your thoughts here...'
     id="my-notes"
     name="my-notes"
     rows="8"
@@ -19,7 +20,7 @@ function NotesForm({ userNotes, submitFeedback, isbn }) {
     onChange={(event) => setNotes(event.target.value)}>
   </textarea>
 
-  const editButton = <button className="edit-button" onClick={() => setIsEditing(isEditing ? false : true)}>Edit Thoughts</button>
+  const editButton = <button className="edit-button" onClick={() => setIsEditing(isEditing ? false : true)}>Edit</button>
 
   const submitButton = <button className='submit-button' onClick={() => {
     submitFeedback(notes, isbn)
