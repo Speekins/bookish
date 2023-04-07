@@ -34,7 +34,7 @@ export default function BookVariant({
   />
 
   const showOrHide = () => {
-    let overlay = document.querySelector('.book-variant-cover-overlay')
+    let overlay = document.getElementById(`${isbn}`)
     overlay.classList.contains('hidden') ? overlay.classList.remove('hidden') : overlay.classList.add('hidden')
   }
 
@@ -51,7 +51,7 @@ export default function BookVariant({
         onClick={() => handleModalState(isbn)}
       >
         <img alt={`Cover of ${title}`} src={`${cover}`} className="book-variant-cover" />
-        <div className='book-variant-cover-overlay hidden'>
+        <div className='book-variant-cover-overlay hidden' id={isbn}>
           {userRating ? overlayRating : <p>No Rating Yet!</p>}
         </div>
       </div>
