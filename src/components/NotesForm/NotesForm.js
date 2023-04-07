@@ -10,33 +10,29 @@ function NotesForm({ userNotes, submitFeedback, isbn }) {
     setNotes(userNotes ? userNotes : '')
   }, [userNotes])
 
-  const textForm = <div>
-    <label htmlFor="my-notes">My Notes</label>
-    <textarea
-      id="my-notes"
-      name="my-notes"
-      rows="4"
-      cols="50"
-      value={notes}
-      onChange={(event) => setNotes(event.target.value)}>
-    </textarea>
-    <button onClick={() => {
-      submitFeedback(notes, isbn)
-      setIsEditing(isEditing ? false : true)
-    }}>Submit</button>
-  </div>
+  const textForm = <textarea
+    id="my-notes"
+    name="my-notes"
+    rows="8"
+    cols="50"
+    value={notes}
+    onChange={(event) => setNotes(event.target.value)}>
+  </textarea>
 
-  const userNoteDiv = <div>
-    <h3>My Notes</h3>
-    <div>
-      <p>{userNotes}</p>
-    </div>
-    <button onClick={() => setIsEditing(isEditing ? false : true)}>Edit Thoughts</button>
-  </div>
+  const editButton = <button className="edit-button" onClick={() => setIsEditing(isEditing ? false : true)}>Edit Thoughts</button>
+
+  const submitButton = <button className='submit-button' onClick={() => {
+    submitFeedback(notes, isbn)
+    setIsEditing(isEditing ? false : true)
+  }}>Submit</button>
 
   return (
-    <div>
-      {isEditing ? textForm : userNoteDiv}
+    <div className='my-notes-container'>
+      <h3 className='my-notes-header'>My Notes</h3>
+      <div className='text-form'>
+        {isEditing ? textForm : <p>{userNotes}</p>}
+      </div>
+      {isEditing ? submitButton : editButton}
     </div>
   )
 }

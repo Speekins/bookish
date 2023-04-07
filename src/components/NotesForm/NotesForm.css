@@ -1,0 +1,48 @@
+.my-notes-container {
+  height: 25%;
+}
+
+.text-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #159895;
+  border-radius: 10px;
+  height: 100%;
+  padding: 10px;
+}
+
+.my-notes-header {
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  font-size: 15px;
+  background-color: #159895;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.submit-button {
+  border: none;
+  background-color: #159895;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.edit-button {
+  border: none;
+  background-color: #159895;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.submit-button:hover,
+.edit-button:hover {
+  cursor: pointer;
+}
