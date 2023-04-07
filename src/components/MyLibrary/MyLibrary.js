@@ -29,6 +29,7 @@ const MyLibrary = ({
         rank={book.rank}
         genre={book.genre}
         genreSelection={book.genreSelection || null}
+        userRating={book.userRating}
         weeks_on_list={book.weeks_on_list}
         description={book.description}
         isFavorite={book.isFavorite}

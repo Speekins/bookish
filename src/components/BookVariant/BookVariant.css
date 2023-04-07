@@ -8,11 +8,29 @@
   margin: 10px 0;
 }
 
+.book-variant-cover-container {
+  position: relative
+}
+
 .book-variant-cover {
   width: 250px;
   height: auto;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
+}
+
+.book-variant-cover-overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.7);
 }
 
 .book-variant-cover:hover {

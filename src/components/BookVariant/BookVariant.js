@@ -6,46 +6,48 @@ import fillHeart from '../assets/images/heart-solid.svg'
 
 export default function BookVariant({
   title,
-  author,
   cover,
-  url,
   isbn,
   genre,
   genreSelection,
   isFavorite,
+  userRating,
   addToFavorites,
   removeFromFavorites,
   handleModalState,
-  rank,
-  weeks_on_list,
-  description }) {
+}) {
 
-    const favorite = <img src={fillHeart}
-      alt="favorite icon"
-      className='book-variant-heart'
-      onClick={() => {
-        removeFromFavorites(isbn, genreSelection)
-      }}
-    />
+  const favorite = <img src={fillHeart}
+    alt="favorite icon"
+    className='book-variant-heart'
+    onClick={() => {
+      removeFromFavorites(isbn, genreSelection)
+    }}
+  />
 
-    const unFavorite = <img src={heart}
-      alt="favorite icon"
-      className='book-variant-heart'
-      onClick={() => {
-        addToFavorites(isbn, genre, genreSelection)
-      }}
-    />
+  const unFavorite = <img src={heart}
+    alt="favorite icon"
+    className='book-variant-heart'
+    onClick={() => {
+      addToFavorites(isbn, genre, genreSelection)
+    }}
+  />
 
-    return (
-      <div className='book-variant'>
+  return (
+    <div className='book-variant'>
+      <div className='book-variant-cover-container'>
         <img alt={`Cover of ${title}`} src={`${cover}`} className="book-variant-cover" onClick={() => handleModalState(isbn)} />
-        <div className='book-variant-title'>
-          {isFavorite ? favorite : unFavorite}
-          <p className='name'>{title}</p>
+        <div className='book-variant-cover-overlay'>
+          {userRating ? <p>{userRating}⭐</p> : <p>No Rating Yet!</p>}
         </div>
       </div>
-    )
-  }
+      <div className='book-variant-title'>
+        {isFavorite ? favorite : unFavorite}
+        <p className='name'>{title}</p>
+      </div>
+    </div>
+  )
+}
 
 // BookVariant.propTypes = {
 //   book_id: PropTypes.number.isRequired,
