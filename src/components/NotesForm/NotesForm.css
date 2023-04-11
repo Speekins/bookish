@@ -25,6 +25,10 @@ textarea {
   border: none;
 }
 
+textarea::placeholder {
+  color: rgb(208, 218, 227);
+}
+
 .submit-button,
 .edit-button {
   border: none;

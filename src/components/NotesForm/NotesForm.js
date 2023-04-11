@@ -11,7 +11,7 @@ function NotesForm({ userNotes, submitFeedback, isbn }) {
   }, [userNotes])
 
   const textForm = <textarea
-  placeholder='Type your thoughts here...'
+    placeholder='Type your thoughts here...'
     id="my-notes"
     name="my-notes"
     rows="8"
