@@ -8,6 +8,14 @@
   margin: 10px 0;
 }
 
+.book-variant-cover-container {
+  position: relative;
+}
+
+.book-variant-cover-container:hover {
+  cursor: pointer;
+}
+
 .book-variant-cover {
   width: 250px;
   height: auto;
@@ -15,10 +23,18 @@
   border-bottom: 5px solid transparent;
 }
 
-.book-variant-cover:hover {
-  border-top: 5px solid rgb(238, 200, 62);
-  border-bottom: 5px solid rgb(238, 200, 62);
-  cursor: pointer;
+.book-variant-cover-overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.7);
 }
 
 .book-variant-title {
@@ -41,6 +57,10 @@
 .book-variant-heart:hover {
   transform: scale(1.2);
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 600px) {

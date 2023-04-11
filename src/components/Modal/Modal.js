@@ -5,28 +5,38 @@ import star from '../assets/images/star-regular.svg'
 import fillStar from '../assets/images/star-solid.svg'
 import './Modal.css'
 
-const Modal = ({ handleModalState, modalDetails, submitNotes }) => {
+const Modal = ({ handleModalState, modalDetails, submitFeedback }) => {
 
-  const [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(modalDetails.userRating)
+  const [starSet, setStarSet] = useState([])
 
   useEffect(() => {
-    document.getElementsByClassName('star').map(el => {
+    let set = document.getElementsByClassName('star')
+    Array.from(set).map(el => {
       if (el.id <= rating) {
         el.src = fillStar
         return el
       } else {
+        el.src = star
         return el
       }
     })
+    submitFeedback(rating, modalDetails.primary_isbn13)
   }, [rating])
 
-  let starSet = <div className='star-set'>
-    <img src={star} alt="star" className='star' id='1' onClick={(event) => setRating(Number(event.target.id))} />
-    <img src={star} alt="star" className='star' id='2' onClick={(event) => setRating(Number(event.target.id))} />
-    <img src={star} alt="star" className='star' id='3' onClick={(event) => setRating(Number(event.target.id))} />
-    <img src={star} alt="star" className='star' id='4' onClick={(event) => setRating(Number(event.target.id))} />
-    <img src={star} alt="star" className='star' id='5' onClick={(event) => setRating(Number(event.target.id))} />
-  </div>
+  useEffect(() => {
+    let starSet = []
+
+    for (let i = 1; i < 6; i++) {
+      console.log(!rating)
+        starSet.push(
+          <img src={(i > rating || !rating) ? star : fillStar} alt="star" className='star' id={i} key={i} onClick={(event) => { setRating(Number(event.target.id)) }} />
+        )
+    }
+    setStarSet(starSet)
+  }, [])
+
+
 
   return (
     <div className='modal-container'>
@@ -35,17 +45,17 @@ const Modal = ({ handleModalState, modalDetails, submitNotes }) => {
           <button className='close-modal' onClick={() => handleModalState()}>X</button>
         </span>
         <h1 className='modal-header'>{modalDetails.title}</h1>
-        {starSet}
         <div className='modal-details'>
           <img className='modal-cover' alt="Cover" src={modalDetails.book_image} />
           <div>
+            {starSet}
             <p><b>Author(s)</b>: {modalDetails.contributor}</p>
             <div className='modal-synopsis'>
               <p>{modalDetails.description}</p>
             </div>
             <NotesForm
               userNotes={modalDetails.userNotes}
-              submitNotes={submitNotes}
+              submitFeedback={submitFeedback}
               isbn={modalDetails.primary_isbn13}
             />
           </div>

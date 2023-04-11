@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './NotesForm.css'
 
-function NotesForm({ userNotes, submitNotes, isbn }) {
+function NotesForm({ userNotes, submitFeedback, isbn }) {
 
   const [isEditing, setIsEditing] = useState(false)
   const [notes, setNotes] = useState()
@@ -11,7 +11,7 @@ function NotesForm({ userNotes, submitNotes, isbn }) {
   }, [userNotes])
 
   const textForm = <div>
-    < label htmlFor="my-notes" > My Notes</label>
+    <label htmlFor="my-notes">My Notes</label>
     <textarea
       id="my-notes"
       name="my-notes"
@@ -21,7 +21,7 @@ function NotesForm({ userNotes, submitNotes, isbn }) {
       onChange={(event) => setNotes(event.target.value)}>
     </textarea>
     <button onClick={() => {
-      submitNotes(notes, isbn)
+      submitFeedback(notes, isbn)
       setIsEditing(isEditing ? false : true)
     }}>Submit</button>
   </div>

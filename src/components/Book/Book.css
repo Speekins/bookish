@@ -15,12 +15,6 @@
   height: 100%;
 }
 
-/* .book-cover:hover {
-  border-top: 5px solid rgb(238, 200, 62);
-  border-bottom: 5px solid rgb(238, 200, 62);
-  cursor: pointer;
-} */
-
 .book-info {
   display: flex;
   flex-direction: column;

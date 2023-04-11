@@ -8,6 +8,7 @@
   width: 100%;
   min-height: 100vh;
   background: rgb(0, 0, 0, 0.7);
+  z-index: 1;
 }
 
 .modal {
@@ -23,6 +24,7 @@
   border-radius: 12px;
   padding: 20px;
   overflow: scroll;
+  z-index: 2;
 }
 
 .modal-header {
@@ -73,6 +75,16 @@
   cursor: pointer;
   border-top: 2px black solid;
   border-bottom: 2px black solid
+}
+
+.star {
+  width: 40px;
+  height: auto;
+  filter: invert(98%) sepia(93%) saturate(6340%) hue-rotate(325deg) brightness(100%) contrast(87%);
+}
+
+.star:hover {
+  cursor: pointer;
 }
 
 @media (max-width: 1000px) {
