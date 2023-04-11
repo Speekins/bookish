@@ -20,6 +20,7 @@ const MyLibrary = ({ myLibrary, modalDetails, handleModalState, isLoading, clear
         isbn={book.primary_isbn13}
         rank={book.rank}
         genre={book.genre}
+        genreSelection={book.genreSelection || null}
         weeks_on_list={book.weeks_on_list}
         description={book.description}
         isFavorite={book.isFavorite}
