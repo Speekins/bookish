@@ -41,6 +41,7 @@ const Search = ({
           weeks_on_list={book.weeks_on_list}
           description={book.description}
           isFavorite={book.isFavorite}
+          isSearchedBook={true}
           addToFavorites={addToFavorites}
           removeFromFavorites={removeFromFavorites}
           handleModalState={handleModalState}
@@ -62,13 +63,21 @@ const Search = ({
           <img src={Loading} alt="Loading" className='loading-image' />
         </div>
       }
-      <div className='search-bar'>
-        <input type="date" value={date} onChange={(event) => setDate(event.target.value)}></input>
-        <button className='search-submit' onClick={() => searchByYear(date)}>Submit</button>
+      <div className='search-bar-container'>
+        <div className='search-bar'>
+          <input 
+          type="date" 
+          className='search-by-date' 
+          value={date}
+          min='2009-01-01'
+          onChange={(event) => setDate(event.target.value)}>
+          </input>
+          <button className='search-submit' onClick={() => searchByYear(date)}>Submit</button>
+        </div>
+        <select className='selection' value={genreSelection} onChange={(event) => setGenreSelection(event.target.value)}>
+          {options}
+        </select>
       </div>
-      <select value={genreSelection} onChange={(event) => setGenreSelection(event.target.value)}>
-        {options}
-      </select>
       {null && <h1 className='year'>{date}</h1>}
       <div className='search-container'>
         {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}

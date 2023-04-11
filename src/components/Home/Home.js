@@ -45,7 +45,7 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
       />)
 
     const selection =
-      <select onChange={(event) => setGenreSelection(event.target.value)}>
+      <select className='selection' onChange={(event) => setGenreSelection(event.target.value)}>
         <option value='hardcover-fiction'>Fiction</option>
         <option value='hardcover-nonfiction'>NonFiction</option>
         <option value='business-books'>Business</option>
@@ -75,7 +75,9 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
         }
         {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
         <NavBar clearSearch={clearSearch} view='home' />
-        {selection}
+        <div className='selection-bar'>
+          {selection}
+        </div>
         <h1 className='genre-name'>{displayGenre}</h1>
         <div className='genre' id='fiction'>
           {!isLoading && books ? booksToDisplay : (!!isLoading ? <p>Loading...</p> : warning)}

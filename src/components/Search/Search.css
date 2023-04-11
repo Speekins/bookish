@@ -20,40 +20,44 @@
   padding-right: 20px;
 }
 
-.year-select {
+.search-bar-container {
   font-family: 'Nanum Gothic', sans-serif;
-  font-size: 20px;
-  width: 15%;
-  padding-left: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: rgb(181, 168, 168);
-  cursor: pointer
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%
 }
 
 .search-bar {
+  width: 75%;
+}
+
+.search-by-date {
   font-family: 'Nanum Gothic', sans-serif;
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: baseline
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+  width: 40%;
+  padding: 2px 10px;
+  background-color: #159895;
+  color: white;
 }
 
 .search-submit {
-  font-family: 'Nanum Gothic', sans-serif;
-  height: auto;
-  font-size: 20px;
-  width: auto;
+  font-size: 24px;
+  border-radius: 10px;
   border: none;
-  background-color: white;
-  border-top: 2px transparent solid;
-  border-bottom: 2px transparent solid
+  width: 20%;
+  padding: 0 10px;
+  background-color: #159895;
+  color: white;
+  margin-left: 20px
 }
 
-.search-submit:hover {
+.search-submit:hover,
+.search-by-date:hover {
   cursor: pointer;
-  border-top: 2px black solid;
-  border-bottom: 2px black solid
 }
 
 .year {

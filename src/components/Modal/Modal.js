@@ -45,11 +45,11 @@ const Modal = ({ handleModalState, modalDetails, submitFeedback }) => {
           <button className='close-modal' onClick={() => handleModalState()}>X</button>
         </span>
         <h1 className='modal-header'>{modalDetails.title}</h1>
-        <div className='modal-details'>
+        <div className='modal-details-container'>
           <img className='modal-cover' alt="Cover" src={modalDetails.book_image} />
-          <div>
+          <div className='modal-details'>
             {starSet}
-            <p><b>Author(s)</b>: {modalDetails.contributor}</p>
+            <p><b>Author(s)</b>: {modalDetails.author}</p>
             <div className='modal-synopsis'>
               <p>{modalDetails.description}</p>
             </div>

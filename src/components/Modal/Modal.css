@@ -18,9 +18,9 @@
   flex-direction: column;
   width: 70%;
   height: 75vh;
-  background: white;
-  color: black;
-  border: 4px solid rgb(238, 200, 62);
+  background: #57C5B6;
+  color: white;
+  border: none;
   border-radius: 12px;
   padding: 20px;
   overflow: scroll;
@@ -30,11 +30,11 @@
 .modal-header {
   font-size: 40px;
   margin-top: 0;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .modal-cover {
-  height: 60vh;
+  height: 70vh;
   width: auto;
 }
 
@@ -42,16 +42,24 @@
   width: 90%;
   border: 1px black solid;
   padding: 10px;
-  font-size: 18px;
 }
 
-.modal-details {
+.modal-details-container {
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   font-size: 25px;
+}
+
+.modal-details {
+  margin-left: 2vw;
+  height: 100%;
+}
+
+.modal p {
+  font-size: 20px;
 }
 
 .close-button-container {
@@ -62,19 +70,18 @@
 
 .close-modal {
   font-family: 'Nanum Gothic', sans-serif;
-  height: auto;
+  height: 40px;
+  width: 40px;
   font-size: 20px;
-  width: auto;
   border: none;
-  background-color: white;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
+  background-color: #159895;
+  border-radius: 50%;
+  transition-duration: 200ms;
 }
 
 .close-modal:hover {
   cursor: pointer;
-  border-top: 2px black solid;
-  border-bottom: 2px black solid
+  font-size: 24px;
 }
 
 .star {
