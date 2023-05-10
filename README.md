@@ -1,5 +1,14 @@
 # **BOOKISH**
 [Deployed Link](https://bookish-beta.vercel.app/)
+<div align="center">
+  <img width="500" height="500" alt="bookish logo" align="center" src="https://github.com/Speekins/Bookish/assets/74210902/5cb6b4cb-b562-46e7-8e27-3bce78bf9441">
+</div>
+
+### Abstract
+Bookish is a book information application providing the most up-to-date list of top-rated books from week-to-week. Users are able to scroll through these books according to 8 different genre selections. Additionally, a user can "favorite" a book they would like to read, having it sent to "My Library". Finally, if a user does not see a book they like, they can look at the most awarded books from years past.<br>
+The target user for this application are individuals who are readers with very busy lives, yet want to keep up-to-date with current popular books, and save them to be read later. The user flow first shows all genres, with 10 of the top books apiece. If the user would like additional information, the user can click on the book cover and be presented with a modal with the authoor's name, book grade, year published, and synopsis. If the book is "favorited", the heart will fill in and that book will then appear in "My Library" to be saved for later. Th user logically can also proceed to the Search page (via the navbar) where the user may search for books by year.
+
+This project was created as the final showcase of skills gained in `React` over the course of the third module (of four) of the Turing front-end software engineering program. This project is the culmination of gained experience and knowledge listed under the `Technologies` heading below.
 
 ### Home Page
 <img width="1348" alt="image" src="https://user-images.githubusercontent.com/74210902/212802364-bc0546db-b7de-4a27-9b1f-ba9d824afecc.png">
@@ -12,12 +21,6 @@
 
 ### Popular Book Search
 <img width="1340" alt="image" src="https://user-images.githubusercontent.com/74210902/212802882-81c377a9-8f2a-4b47-8add-68b1b9b48bd3.png">
-
-### Abstract
-Bookish is a book information application providing the most up-to-date list of top-rated books from week-to-week. Users are able to scroll through these books according to 8 different genre selections. Additionally, a user can "favorite" a book they would like to read, having it sent to "My Library". Finally, if a user does not see a book they like, they can look at the most awarded books from years past.<br>
-The target user for this application are individuals who are readers with very busy lives, yet want to keep up-to-date with current popular books, and save them to be read later. The user flow first shows all genres, with 10 of the top books apiece. If the user would like additional information, the user can click on the book cover and be presented with a modal with the authoor's name, book grade, year published, and synopsis. If the book is "favorited", the heart will fill in and that book will then appear in "My Library" to be saved for later. Th user logically can also proceed to the Search page (via the navbar) where the user may search for books by year.
-
-This project was created as the final showcase of skills gained in `React` over the course of the third module (of four) of the Turing front-end software engineering program. This project is the culmination of gained experience and knowledge listed under the `Technologies` heading below.
 
 ### Contributors
 [Spencer Haka](https://github.com/Speekins)
