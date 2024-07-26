@@ -42,7 +42,7 @@ export default function BookVariant({
   }
 
   let overlayRating = <div>
-    <h2 style={{ "text-decoration": "underline" }}>Your Rating</h2>
+    <h2 style={{ "textDecoration": "underline" }}>Your Rating</h2>
     <h1>{userRating}⭐</h1>
   </div>
 

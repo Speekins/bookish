@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes, { bool } from "prop-types"
 import libraryBanner from '../assets/images/my-library-banner.jpg'
-import './MyLibrary.css'
 import BookVariant from '../BookVariant/BookVariant'
 import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 import Loading from '../assets/images/bookish_loading.png'
+import { getMyLibary } from '../../apiCalls'
+import './MyLibrary.css'
 
 const MyLibrary = ({
   myLibrary,
@@ -14,11 +15,21 @@ const MyLibrary = ({
   isLoading,
   clearSearch,
   addToFavorites,
-  removeFromFavorites, 
+  removeFromFavorites,
   submitFeedback }) => {
 
-  if (myLibrary) {
-    let booksToDisplay = myLibrary.map((book, idx) =>
+  const [myBooks, setMyBooks] = useState([])
+
+  useEffect(() => {
+    async function getData() {
+      const books = await getMyLibary()
+      setMyBooks(books)
+    }
+    getData()
+  }, [])
+
+  if (myBooks) {
+    let booksToDisplay = myBooks.map((book, idx) =>
       <BookVariant
         title={book.title}
         cover={book.book_image}
@@ -46,7 +57,7 @@ const MyLibrary = ({
             <img src={Loading} alt="Loading" className='loading-image' />
           </div>
         }
-        {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} submitFeedback={submitFeedback}/>}
+        {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} submitFeedback={submitFeedback} />}
         <NavBar clearSearch={clearSearch} view='my-library' />
         <h1 className='my-library-header'>My Library</h1>
         {!myLibrary.length && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}

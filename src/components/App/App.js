@@ -174,7 +174,6 @@ const App = () => {
         if (typeof notes === 'string') {
           book.userNotes = notes
         } else {
-          console.log(notes)
           book.userRating = notes
         }
         return book
@@ -182,6 +181,7 @@ const App = () => {
         return book
       }
     })
+    console.log(myLibrary)
     dispatch({ type: "FEEDBACK", payload: myLibrary })
   }
 

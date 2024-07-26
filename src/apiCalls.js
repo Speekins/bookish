@@ -1,7 +1,7 @@
 const key = 'gbyfINMWDrzRtiKj161LGdGwcnlnHEwG'
 
 const getBooks = (genre) => {
-  return fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${genre}.json?api-key=${key}`)
+  return fetch(`http://localhost:3001/searchbook/${genre}`)
     .then(response => {
       if (response.ok) {
         return response.json()
@@ -24,7 +24,7 @@ const getBookById = (url, id) => {
 
 const getBooksByDate = (date) => {
   date = String(date)
-  return fetch(`https://api.nytimes.com/svc/books/v3/lists/overview.json?published_date=${date}&api-key=${key}`)
+  return fetch(`http://localhost:3001/searchbook/${date}`)
     .then(response => {
       if (response.ok) {
         return response.json()
@@ -33,7 +33,17 @@ const getBooksByDate = (date) => {
     })
 }
 
-export { getBooks, getBookById, getBooksByDate }
+const getMyLibary = async () => {
+  try {
+    const response = await fetch('https://bookish-api-production.up.railway.app/book')
+    return response.json()
+  } catch (error) {
+    console.log(`ERROR: ${error}`)
+    return error
+  }
+}
+
+export { getBooks, getBookById, getBooksByDate, getMyLibary }
 
 let genreNames = [
   "humor",
