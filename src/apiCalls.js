@@ -43,7 +43,17 @@ const getMyLibary = async () => {
   }
 }
 
-export { getBooks, getBookById, getBooksByDate, getMyLibary }
+const removeFavoriteBook = async (id) => {
+  try {
+    const response = await fetch(`https://bookish-api-production.up.railway.app/book/${id}`, { method: 'DELETE'})
+    return response.json()
+  } catch (error) {
+    console.log(`ERROR: ${error}`)
+    return error
+  }
+}
+
+export { getBooks, getBookById, getBooksByDate, getMyLibary, removeFavoriteBook }
 
 let genreNames = [
   "humor",

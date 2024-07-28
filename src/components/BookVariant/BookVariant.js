@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import './BookVariant.css'
 import heart from '../assets/images/heart-regular.svg'
@@ -6,6 +6,7 @@ import fillHeart from '../assets/images/heart-solid.svg'
 
 export default function BookVariant({
   title,
+  id,
   cover,
   isbn,
   genre,
@@ -14,15 +15,15 @@ export default function BookVariant({
   isSearchedBook,
   userRating,
   addToFavorites,
-  removeFromFavorites,
+  handleBookDelete,
   handleModalState,
 }) {
 
   const favorite = <img src={fillHeart}
     alt="favorite icon"
     className='book-variant-heart'
-    onClick={() => {
-      removeFromFavorites(isbn, genreSelection)
+    onClick={async () => {
+      handleBookDelete(id)
     }}
   />
 

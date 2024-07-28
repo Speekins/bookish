@@ -5,7 +5,7 @@ import BookVariant from '../BookVariant/BookVariant'
 import NavBar from '../NavBar/NavBar'
 import Modal from '../Modal/Modal'
 import Loading from '../assets/images/bookish_loading.png'
-import { getMyLibary } from '../../apiCalls'
+import { getMyLibary, removeFavoriteBook } from '../../apiCalls'
 import './MyLibrary.css'
 
 const MyLibrary = ({
@@ -28,10 +28,17 @@ const MyLibrary = ({
     getData()
   }, [])
 
+  const handleBookDelete = async (id) => {
+    await removeFavoriteBook(id)
+    const books = await getMyLibary()
+    setMyBooks(books)
+  }
+
   if (myBooks) {
     let booksToDisplay = myBooks.map((book, idx) =>
       <BookVariant
         title={book.title}
+        id={book._id}
         cover={book.book_image}
         url={book.amazon_product_url}
         author={book.contributor}
@@ -45,7 +52,7 @@ const MyLibrary = ({
         description={book.description}
         isFavorite={book.isFavorite}
         addToFavorites={addToFavorites}
-        removeFromFavorites={removeFromFavorites}
+        handleBookDelete={handleBookDelete}
         handleModalState={handleModalState}
       />)
 
@@ -60,7 +67,7 @@ const MyLibrary = ({
         {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} submitFeedback={submitFeedback} />}
         <NavBar clearSearch={clearSearch} view='my-library' />
         <h1 className='my-library-header'>My Library</h1>
-        {!myLibrary.length && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}
+        {!myBooks.length && isLoading && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}
         <div className='book-container'>
           {booksToDisplay}
         </div>
