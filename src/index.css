@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #0f4684;
+  background-color: #EDE8F5;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -18,4 +18,11 @@ code {
 
 * {
   scroll-behavior: smooth;
+}
+
+.home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

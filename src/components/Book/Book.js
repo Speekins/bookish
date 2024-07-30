@@ -21,7 +21,8 @@ const Book = ({
   const favorite = <img src={fillHeart}
     alt="favorite icon"
     className='heart'
-    onClick={() => {
+    onClick={(e) => {
+      e.target.classList.remove('hearted')
       removeFromFavorites(isbn)
     }}
   />
@@ -29,7 +30,8 @@ const Book = ({
   const unFavorite = <img src={heart}
     alt="favorite icon"
     className='heart'
-    onClick={() => {
+    onClick={(e) => {
+      e.target.classList.add('hearted')
       addToFavorites(isbn, genre)
     }}
   />
@@ -40,7 +42,6 @@ const Book = ({
       <div className='book-info'>
         <div className='book-info-header'>
           <div className='title-author'>
-            <p>{genre}</p>
             <h1 className='title'>{title}</h1>
             <p className='author'>{author}</p>
           </div>

@@ -22,7 +22,7 @@ export default function BookVariant({
   const favorite = <img src={fillHeart}
     alt="favorite icon"
     className='book-variant-heart'
-    onClick={async () => {
+    onClick={async (e) => {
       handleBookDelete(id)
     }}
   />

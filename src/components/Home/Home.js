@@ -75,10 +75,10 @@ const Home = ({ books, showModal, handleModalState, bookDetails, isLoading, clea
         }
         {showModal && <Modal handleModalState={handleModalState} bookDetails={bookDetails} />}
         <NavBar clearSearch={clearSearch} view='home' />
-        <div className='selection-bar'>
+        <div className='home-header'>
+          <h1 className='genre-name'>{displayGenre}</h1>
           {selection}
         </div>
-        <h1 className='genre-name'>{displayGenre}</h1>
         <div className='genre' id='fiction'>
           {!isLoading && books ? booksToDisplay : (!!isLoading ? <p>Loading...</p> : warning)}
         </div>
