@@ -45,7 +45,6 @@ const Book = ({
             <h1 className='title'>{title}</h1>
             <p className='author'>{author}</p>
           </div>
-          {isFavorite ? favorite : unFavorite}
         </div>
         <div className='book-info-details'>
           <p className='description'>{description}</p>
@@ -62,6 +61,7 @@ const Book = ({
           <a href={url} className='url' target="_blank" rel="noopener noreferrer">More Info & Purchase Options</a>
         </div>
       </div>
+      {isFavorite ? favorite : unFavorite}
     </div>
   )
 }
