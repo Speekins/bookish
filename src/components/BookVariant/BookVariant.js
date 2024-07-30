@@ -16,6 +16,7 @@ export default function BookVariant({
   userRating,
   addToFavorites,
   handleBookDelete,
+  handleClick,
   handleModalState,
 }) {
 
@@ -48,11 +49,10 @@ export default function BookVariant({
   </div>
 
   return (
-    <div className='book-variant'>
+    <div className='book-variant' onClick={() => handleClick(id)}>
       <div className='book-variant-cover-container'
         onMouseEnter={showOrHide}
         onMouseLeave={showOrHide}
-        onClick={() => handleModalState(isbn)}
       >
         <img alt={`Cover of ${title}`} src={`${cover}`} className="book-variant-cover" />
         {!isSearchedBook &&

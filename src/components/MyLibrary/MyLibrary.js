@@ -9,16 +9,14 @@ import { getMyLibary, removeFavoriteBook } from '../../apiCalls'
 import './MyLibrary.css'
 
 const MyLibrary = ({
-  myLibrary,
-  modalDetails,
-  handleModalState,
+  // handleModalState,
   isLoading,
   clearSearch,
   addToFavorites,
-  removeFromFavorites,
   submitFeedback }) => {
 
   const [myBooks, setMyBooks] = useState([])
+  const [modalDetails, setModalDetails] = useState(null)
 
   useEffect(() => {
     async function getData() {
@@ -32,6 +30,19 @@ const MyLibrary = ({
     await removeFavoriteBook(id)
     const books = await getMyLibary()
     setMyBooks(books)
+  }
+
+  const handleClick = (id = null) => {
+    if (!id) {
+      setModalDetails(null)
+    } else {
+      const book = myBooks.find(book => id === book._id)
+    setModalDetails(book)
+    } 
+  }
+
+  const handleModalState = () => {
+    setModalDetails(null)
   }
 
   if (myBooks) {
@@ -53,6 +64,7 @@ const MyLibrary = ({
         isFavorite={book.isFavorite}
         addToFavorites={addToFavorites}
         handleBookDelete={handleBookDelete}
+        handleClick={handleClick}
         handleModalState={handleModalState}
       />)
 
@@ -64,7 +76,7 @@ const MyLibrary = ({
             <img src={Loading} alt="Loading" className='loading-image' />
           </div>
         }
-        {modalDetails && <Modal handleModalState={handleModalState} modalDetails={modalDetails} submitFeedback={submitFeedback} />}
+        {modalDetails && <Modal handleClick={handleClick} modalDetails={modalDetails} submitFeedback={submitFeedback} />}
         <NavBar clearSearch={clearSearch} view='my-library' />
         <h1 className='my-library-header'>My Library</h1>
         {!myBooks.length && isLoading && <p className='no-books-warning'>There are no books in your library yet. Add some!</p>}
