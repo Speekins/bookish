@@ -1,5 +1,3 @@
-const key = 'gbyfINMWDrzRtiKj161LGdGwcnlnHEwG'
-
 const getBooks = (genre) => {
   return fetch(`http://localhost:3001/searchbook/${genre}`)
     .then(response => {
@@ -45,7 +43,7 @@ const getMyLibary = async () => {
 
 const removeFavoriteBook = async (id) => {
   try {
-    const response = await fetch(`https://bookish-api-production.up.railway.app/book/${id}`, { method: 'DELETE'})
+    const response = await fetch(`https://bookish-api-production.up.railway.app/book/${id}`, { method: 'DELETE' })
     return response.json()
   } catch (error) {
     console.log(`ERROR: ${error}`)
@@ -53,7 +51,22 @@ const removeFavoriteBook = async (id) => {
   }
 }
 
-export { getBooks, getBookById, getBooksByDate, getMyLibary, removeFavoriteBook }
+const updateFavoriteBook = async (id, body) => {
+  try {
+    const response = await fetch(`http://localhost:3001/book/${id}`,
+      {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'PUT',
+        body: JSON.stringify(body)
+      })
+    return response.json()
+  } catch (error) {
+    console.log(`ERROR: ${error}`)
+    return error
+  }
+}
+
+export { getBooks, getBookById, getBooksByDate, getMyLibary, removeFavoriteBook, updateFavoriteBook }
 
 let genreNames = [
   "humor",

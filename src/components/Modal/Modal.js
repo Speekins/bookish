@@ -4,15 +4,16 @@ import NotesForm from '../NotesForm/NotesForm'
 import star from '../assets/images/star-regular.svg'
 import fillStar from '../assets/images/star-solid.svg'
 import './Modal.css'
+import { updateFavoriteBook } from '../../apiCalls'
 
 const Modal = ({ handleClick, modalDetails, submitFeedback }) => {
 
   const [rating, setRating] = useState(modalDetails.userRating)
   const [starSet, setStarSet] = useState([])
 
-  const handleUserChange = useCallback((ratingNum) => {
-    submitFeedback(ratingNum, modalDetails.primary_isbn13)
-  }, [modalDetails, submitFeedback])
+  const handleUserChange = useCallback(async (ratingNum) => {
+    await updateFavoriteBook(modalDetails._id, { 'userRating': ratingNum })
+  }, [modalDetails])
 
   useEffect(() => {
     let starSet = []
@@ -46,7 +47,7 @@ const Modal = ({ handleClick, modalDetails, submitFeedback }) => {
             <NotesForm
               userNotes={modalDetails.userNotes}
               submitFeedback={submitFeedback}
-              isbn={modalDetails.primary_isbn13}
+              id={modalDetails._id}
             />
           </div>
         </div>

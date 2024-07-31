@@ -9,14 +9,14 @@ import { getMyLibary, removeFavoriteBook } from '../../apiCalls'
 import './MyLibrary.css'
 
 const MyLibrary = ({
-  // handleModalState,
-  isLoading,
+  //isLoading,
   clearSearch,
   addToFavorites,
   submitFeedback }) => {
 
   const [myBooks, setMyBooks] = useState([])
   const [modalDetails, setModalDetails] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function getData() {
@@ -24,6 +24,7 @@ const MyLibrary = ({
       setMyBooks(books)
     }
     getData()
+    setIsLoading(false)
   }, [])
 
   const handleBookDelete = async (id) => {
@@ -37,15 +38,15 @@ const MyLibrary = ({
       setModalDetails(null)
     } else {
       const book = myBooks.find(book => id === book._id)
-    setModalDetails(book)
-    } 
+      setModalDetails(book)
+    }
   }
 
   const handleModalState = () => {
     setModalDetails(null)
   }
 
-  if (myBooks) {
+  if (!!myBooks.length) {
     let booksToDisplay = myBooks.map((book, idx) =>
       <BookVariant
         title={book.title}
@@ -71,7 +72,7 @@ const MyLibrary = ({
     return (
       <div className='my-library'>
         <img src={libraryBanner} alt='My Library Banner' className='my-library-banner' />
-        {!!isLoading &&
+        {isLoading &&
           <div className='loading-container'>
             <img src={Loading} alt="Loading" className='loading-image' />
           </div>
