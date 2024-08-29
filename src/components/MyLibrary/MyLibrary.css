@@ -14,6 +14,7 @@
   font-family: 'Nanum Gothic', sans-serif;
   margin-top: 0;
   margin-bottom: 0;
+  color: #7091e6
 }
 
 .no-books-warning {
@@ -24,7 +25,7 @@
   font-family: 'Nanum Gothic', sans-serif;
   margin-top: 0;
   margin-bottom: 0;
-  color: rgb(218, 70, 70)
+  color: rgb(223, 98, 98)
 }
 
 .book-container {
@@ -35,7 +36,7 @@
   row-gap: 2vw;
   padding: 10px;
   align-items: baseline;
-  text-align: center;
+  text-align: center
 }
 
 @media (max-width: 1100px) {

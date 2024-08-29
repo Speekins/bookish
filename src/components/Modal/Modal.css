@@ -15,26 +15,23 @@
   position: relative;
   display: flex;
   align-items: center;
-  flex-direction: column;
   width: 70%;
   height: 75vh;
-  background: #57C5B6;
-  color: white;
+  background: #EDE8F5;
+  color: black;
   border: none;
   border-radius: 12px;
-  padding: 20px;
-  overflow: scroll;
+  padding: 10px;
   z-index: 2;
 }
 
 .modal-header {
-  font-size: 40px;
-  margin-top: 0;
-  margin-bottom: 40px;
+  font-size: 50px;
+  color: #8697C4;
 }
 
 .modal-cover {
-  height: 70vh;
+  height: 90%;
   width: auto;
 }
 
@@ -46,10 +43,9 @@
 
 .modal-details-container {
   display: flex;
-  width: 100%;
+  height: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
   font-size: 25px;
 }
 
@@ -63,25 +59,22 @@
 }
 
 .close-button-container {
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
+  height: 100%
 }
 
 .close-modal {
-  font-family: 'Nanum Gothic', sans-serif;
   height: 40px;
   width: 40px;
   font-size: 20px;
   border: none;
-  background-color: #159895;
+  background-color: #EDE8F5;
   border-radius: 50%;
   transition-duration: 200ms;
+  cursor: pointer;
 }
 
 .close-modal:hover {
-  cursor: pointer;
-  font-size: 24px;
+  background-color: #8697C4;
 }
 
 .star {

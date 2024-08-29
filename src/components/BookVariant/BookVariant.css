@@ -42,8 +42,9 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  font-family: 'Playfair Display SC', serif;
-  font-size: 14px;
+  color: #7091e6;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .book-variant-heart {
