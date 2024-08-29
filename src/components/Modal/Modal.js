@@ -46,7 +46,6 @@ const Modal = ({ handleClick, modalDetails, submitFeedback }) => {
             </div>
             <NotesForm
               userNotes={modalDetails.userNotes}
-              submitFeedback={submitFeedback}
               id={modalDetails._id}
             />
           </div>

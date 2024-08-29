@@ -66,7 +66,6 @@ const MyLibrary = ({
         addToFavorites={addToFavorites}
         handleBookDelete={handleBookDelete}
         handleClick={handleClick}
-        handleModalState={handleModalState}
       />)
 
     return (
