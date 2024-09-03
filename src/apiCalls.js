@@ -53,7 +53,7 @@ const removeFavoriteBook = async (id) => {
 
 const updateFavoriteBook = async (id, body) => {
   try {
-    const response = await fetch(`http://localhost:3001/book/${id}`,
+    const response = await fetch(`https://bookish-api-production.up.railway.app/book/${id}`,
       {
         headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
