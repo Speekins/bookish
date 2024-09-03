@@ -8,6 +8,7 @@
   border: none;
   border-radius: 15px;
   background-color: #ADBBDA;
+  padding: 5px;
 }
 
 .my-library-button,
@@ -16,24 +17,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
   width: auto;
   font-size: 28px;
-  /* font-family: 'Playfair Display SC', serif; */
   font-weight: 600;
   text-decoration: none;
   color: black;
-  border: 2px solid transparent;
-  transition-duration: 200ms;
+  --c: #3D52A0; /* the border color */
+  --b: 4px;    /* the border thickness*/
+  --g: 4px;     /* the gap on hover */
+  padding: calc(var(--g) + var(--b));
+  --_g: #0000 25%,var(--c) 0;
+  background: 
+    conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+     var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+    conic-gradient(            at bottom var(--b) left  var(--b),var(--_g))
+     0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+  transition: .3s, background-position .3s .3s;
+  cursor: pointer;
 }
 
 .my-library-button:hover,
 .home-button:hover,
 .search:hover {
   color: #3D52A0;
-  border-top: 2px solid #3D52A0;
-  border-bottom: 2px solid #3D52A0;
-  cursor: pointer;
+  --_i: 100%;
+  transition: .3s, background-size .3s .3s;
 }
 
 .disabled {
